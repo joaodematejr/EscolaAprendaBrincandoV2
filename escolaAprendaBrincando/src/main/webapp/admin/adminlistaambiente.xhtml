@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="../resources/imagens/icons.png"
+	type="image/x-icon" />
+<title>Lista Ambiente</title>
+</head>
+<h:body>
+	<h:form id="form">
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-text navbar-left">
+				<a class="navbar-brand " href="#">Aprenda Brincando 2.0</a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.cpfClienteLogado}" /> </a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.nomeClienteLogado}" /> </a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1"></div>
+			<!-- /.navbar-collapse -->
+		</div>
+		</nav>
+		<div class="container">
+			<!-- BARRA DE CARREGAMENTO -->
+			<div class="modal fade" id="myModalProxima" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3>Carregando</h3>
+						</div>
+						<div class="modal-body">
+							<img src="../resources/imagens/Progress_bar.gif"
+								class="img-responsive" alt="Imagem responsiva" />
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- //BARRA DE CARREGAMENTO -->
+			<div class="modal-body">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Dados do Ambiente</h3>
+					</div>
+					<div class="col-md-9"></div>
+					<div class="panel-body">
+						<h:dataTable value="#{ambienteMb.listaAmbientes}" var="user"
+							styleClass="table table table-hover table table-bordered">
+							<h:column>
+								<f:facet name="header">Codigo do Ambiente</f:facet>
+								<h:outputText value="#{user.id}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Nome da sala</f:facet>
+								<h:outputText value="#{user.nome}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Descrição das salas</f:facet>
+								<h:outputText value="#{user.descricao}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Quantidade de Turmas</f:facet>
+								<h:outputText value="#{user.quantidade}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Deletar</f:facet>
+								<h:commandLink
+									onclick=" return confirm('Tem certeza da exclusão um ambiente #{user.nome}');"
+									styleClass="btn btn-danger btn-xs btn-block"
+									action="#{ambienteMb.excluir(user.id)}" value="Excluir" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Alterar</f:facet>
+								<h:link styleClass="btn btn-warning btn-xs btn-block"
+									outcome="admincadastroambiente" value="Editar"
+									onclick="redirecionar();">
+									<f:param name="id" value="#{user.id}" />
+								</h:link>
+							</h:column>
+						</h:dataTable>
+					</div>
+				</div>
+			</div>
+			<div class="btn-group btn-group-justified" role="group"
+				aria-label="...">
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-primary btn-outline "
+						data-toggle="modal" data-target="#myModalProxima"
+						onClick="voltarMenuAdm()"><span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Voltar
+						Menu</a>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-primary btn-outline "
+						data-toggle="modal" data-target="#myModalProxima"
+						onClick="adicionar()"><span class="glyphicon glyphicon-plus"
+						aria-hidden="true"></span> Adicionar Ambientes</a>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-danger btn-outline "
+						data-toggle="modal" data-target="#myModalProxima" onClick="sair()"><span
+						class="glyphicon glyphicon-user" aria-hidden="true"></span> Sair</a>
+				</div>
+			</div>
+		</div>
+		<footer class="footer"> </footer>
+		<!--Bootstrap-->
+		<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../resources/css/css/admincadastroambiente.css"
+			rel="stylesheet" />
+		<script src="../resources/js/jquery.js"></script>
+		<script src="../resources/js/mudarPagina.js"></script>
+		<script src="../resources/js/jquery.js"></script>
+		<script src="../resources/js/bootstrap.min.js"></script>
+	</h:form>
+</h:body>
+</html>
+
+
+
+

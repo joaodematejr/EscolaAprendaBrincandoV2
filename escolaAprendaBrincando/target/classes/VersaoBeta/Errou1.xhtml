@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Errou</title>
+	<link href="css/Errou.css" rel="stylesheet"/>
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+$(document).ready(function() {
+		var pontuacao = parseInt(localStorage.getItem("pontuacao"));
+		$(".pontuacao").html("Pontos: " + pontuacao);
+		$(".respostas").click(function() {
+			if ($(this).html() == "CONTINUAR") {
+				pontuacao += 15;
+				localStorage.setItem('pontuacao', pontuacao);
+				location.href="file:///C:/Users/Jo%E3o/Desktop/Versao%20Beta/Versao%20Beta/Acertou1.xhtml";
+			} else {
+				$(this).slideUp(2000);
+				pontuacao = pontuacao +20;
+			}
+			localStorage.setItem('pontuacao', pontuacao);
+			$(".pontuacao").html("Pontos: " + pontuacao);
+		});
+		
+		$(".reiniciar").click(function() {
+			
+		});
+	});
+</script>
+</head> 
+	<body>
+
+			<div id="container">
+				<div id="cabecalho">
+			<div id="menu">	
+				</div>				
+				</div>
+				<div class="balao"><font color = "#FFFFFF">Você errou a resposta correta é</font>
+				<font color = "#FFFF00"> Horse</font><font color = "#FFFFFF"> vamos</font>
+				<a href="Pergunta2.xhtml" style="text-decoration: none"><font color="blue">CONTINUAR</font></a>	
+				</div>
+			</div>
+			<div id="animal">	
+			</div>
+			<div id="div_informacoes">
+			<p class="pontuacao">Pontos: 0</p>
+			</div>
+		
+	</body>
+</html>

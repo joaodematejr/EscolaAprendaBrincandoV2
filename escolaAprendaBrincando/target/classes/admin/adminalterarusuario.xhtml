@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<script src="../resources/js/jquery.js"></script>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="../resources/imagens/icons.png"
+	type="image/x-icon" />
+<title>Cadastro de Úsuarios</title>
+</head>
+<h:body>
+	<!-- BARRA DE CARREGAMENTO -->
+	<div class="modal fade" id="myModalProxima" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Carregando</h3>
+				</div>
+				<div class="modal-body">
+					<img src="../resources/imagens/Progress_bar.gif"
+						class="img-responsive" alt="Imagem responsiva" />
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- BARRA DE CARREGAMENTO -->
+	<h:form>
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-text navbar-left">
+				<a class="navbar-brand " href="#">Aprenda Brincando 2.0</a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.cpfClienteLogado}" /> </a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.nomeClienteLogado}" /> </a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1"></div>
+			<!-- /.navbar-collapse -->
+		</div>
+		</nav>
+		<f:metadata>
+			<f:viewParam name="id" value="#{clienteMb.editarId}" />
+			<f:event listener="#{clienteMb.carregarEdicao}" type="preRenderView" />
+		</f:metadata>
+		<div class="container">
+			<h3>Editar - Usuarios</h3>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Dados dos Úsuarios</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+							<label for="exampleInputPerfil">Perfil</label>
+							<h:selectOneMenu styleClass="form-control"
+								value="#{clienteMb.cliente.perfil}">
+								<f:selectItem itemLabel="-" itemValue="" />
+								<f:selectItem itemLabel="Administrador" itemValue="Administrador" />
+								<f:selectItem itemLabel="Aluno" itemValue="Aluno" />
+								<f:selectItem itemLabel="Professor" itemValue="Professor" />
+							</h:selectOneMenu>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-6 col-lg-6">
+							<div class="form-group">
+								<label for="exampleInputNome">Nome</label>
+								<h:inputText styleClass="form-control"
+									value="#{clienteMb.cliente.nome}" id="exampleInputNome" />
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+							<div class="form-group">
+								<div class="form-group">
+									<label for="exampleInputPerfil">Nascimento</label>
+									<div class='input-group date datetimepicker'>
+										<h:inputText styleClass="form-control"
+											value="#{clienteMb.cliente.nascimento}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:inputText>
+										<span class="input-group-addon"><span
+											class="glyphicon glyphicon-calendar"></span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<label for="exampleInputNome">CPF</label>
+								<h:inputText styleClass="form-control"
+									value="#{clienteMb.cliente.cpf}" id="exampleInputCpf" />
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<label for="exampleInputComplemento">Telefone</label>
+								<h:inputText styleClass="form-control"
+									value="#{clienteMb.cliente.telefone}"
+									id="exampleInputTelefoneFixo" />
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<label for="exampleInputComplemento">E-mail</label>
+								<h:inputText styleClass="form-control"
+									value="#{clienteMb.cliente.email}" id="exampleInputEmail" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="form-group">
+									<label for="exampleInputEstado">Estado</label>
+									<h:selectOneMenu styleClass="form-control"
+										value="#{clienteMb.cliente.estado}">
+										<f:selectItem itemLabel="-" itemValue="" />
+										<f:selectItem itemLabel="SantaCatarina"
+											itemValue="SantaCatarina" />
+										<f:selectItem itemLabel="RioGrandeDoSul"
+											itemValue="RioGrandeDoSul" />
+										<f:selectItem itemLabel="Parana" itemValue="Parana" />
+									</h:selectOneMenu>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="form-group">
+									<label for="exampleInputComplemento">Cidade</label>
+									<h:inputText styleClass="form-control"
+										value="#{clienteMb.cliente.cidade}" id="exampleInputCidade" />
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="form-group">
+									<label for="exampleInputComplemento">Bairro</label>
+									<h:inputText styleClass="form-control"
+										value="#{clienteMb.cliente.bairro}" id="exampleInputBairro" />
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="form-group">
+									<label for="exampleInputNome">CEP</label>
+									<h:inputText styleClass="form-control"
+										value="#{clienteMb.cliente.cep}" id="exampleInputCep" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+								<div class="form-group">
+									<label for="exampleInputNome">Endereço</label>
+									<h:inputText styleClass="form-control"
+										value="#{clienteMb.cliente.endereco}"
+										id="exampleInputEndereco" />
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+								<div class="form-group">
+									<label for="exampleInputComplemento">Complemento</label>
+									<h:inputText styleClass="form-control"
+										value="#{clienteMb.cliente.complemento}"
+										id="exampleInputComplemento" />
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+								<div class="form-group">
+									<label for="exampleInputNumero">Numero</label>
+									<h:inputText styleClass="form-control"
+										value="#{clienteMb.cliente.numero}" id="exampleInputNumero" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="form-group">
+									<label for="exampleInputComplemento">Senha</label>
+									<h:inputSecret redisplay="true" styleClass="form-control"
+										value="#{clienteMb.cliente.senha}" id="exampleInputSenha" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="form-group form-group-sm">
+									<button data-toggle="modal" data-target="#myModalProxima"
+										onClick="voltarMenuAdm()" type="button"
+										class="btn btn-primary btn-circle btn-lg">
+										<i class="glyphicon glyphicon-chevron-left"></i>
+									</button>
+									<span> <h:commandLink
+											styleClass="btn btn-success btn-circle btn-lg"
+											action="#{clienteMb.salvar}">
+											<span class="glyphicon glyphicon-pencil"></span>
+										</h:commandLink>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer"> </footer>
+		<!--Bootstrap-->
+		<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../resources/css/bootstrap-datetimepicker.css"
+			rel="stylesheet" />
+		<link href="../resources/css/css/cadastrarusuarios.css"
+			rel="stylesheet" />
+		<script src="../resources/js/mudarPagina.js"></script>
+		<script src="../resources/js/bootstrap.min.js"></script>
+		<link href="../resources/css/bootstrap-datetimepicker.css"
+			rel="stylesheet" />
+		<script src="../resources/js/datepicker-component.js"></script>
+		<script src="../resources/js/moment-with-locales.js"></script>
+		<script src="../resources/js/bootstrap-datetimepicker.js"></script>
+	</h:form>
+</h:body>
+</html>

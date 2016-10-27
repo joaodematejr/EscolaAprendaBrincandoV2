@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="../resources/imagens/icons.png"
+	type="image/x-icon" />
+<title>Listar Questões</title>
+</head>
+<h:body>
+	<h:form>
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-text navbar-left">
+				<a class="navbar-brand " href="#">Aprenda Brincando 2.0</a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.cpfClienteLogado}" /> </a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.nomeClienteLogado}" /> </a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1"></div>
+			<!-- /.navbar-collapse -->
+		</div>
+		</nav>
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Questões Cadastras</h3>
+				</div>
+				<div class="panel-body">
+					<h:dataTable value="#{perguntaMb.listaPerguntas}" var="perguntas"
+						styleClass="table table table-hover table table-bordered">
+						<h:column>
+							<f:facet name="header">ID</f:facet>
+							<h:outputText value="#{perguntas.id}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Pergunta</f:facet>
+							<h:outputText value="#{perguntas.pergunta}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Resposta Correta</f:facet>
+							<h:outputText value="#{perguntas.correta}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Alternativa Errada </f:facet>
+							<h:outputText value="#{perguntas.primeiraErrada}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Alternativa Errada</f:facet>
+							<h:outputText value="#{perguntas.segundaErrada}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Alternativa Errada</f:facet>
+							<h:outputText value="#{perguntas.terceiraErrada}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Alternativa Errada</f:facet>
+							<h:outputText value="#{perguntas.quartaErrada}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Editar</f:facet>
+							<h:link styleClass="btn btn-warning btn-xs btn-block"
+								outcome="menuprofessor" value="" onclick="redirecionar();">
+								<span class="glyphicon glyphicon-pencil"></span>
+								<f:param name="id" value="#{perguntas.id}" />
+							</h:link>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Deletar</f:facet>
+							<h:commandLink
+								onclick=" return confirm('Tem certeza da exclusão um cliente #{perguntas.pergunta}');"
+								styleClass="btn btn-danger btn-xs btn-block"
+								action="#{perguntaMb.excluir(perguntas.id)}" value="">
+								<span class="glyphicon glyphicon-trash"></span>
+							</h:commandLink>
+						</h:column>
+					</h:dataTable>
+				</div>
+			</div>
+			<div class="modal fade" id="myModalQuestao" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Cadastro - Questões</h4>
+						</div>
+						<div class="modal-body">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Dados das Questões</h3>
+								</div>
+								<div class="panel-body">
+									<h:panelGroup rendered="#{not empty perguntaMb.pergunta.id}">
+										<div class="form-group id">
+											<label for="exampleId">ID</label>
+											<h:inputText styleClass="form-control" readonly="true"
+												value="#{perguntaMb.pergunta.id}" id="exampleId" />
+										</div>
+									</h:panelGroup>
+									<h:inputHidden value="#perguntaMb.pergunta.id}" />
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Professor</label>
+											<h:selectOneMenu styleClass="form-control"
+												value="#{perguntaMb.pergunta.professor}">
+												<f:selectItem itemLabel="-" />
+												<f:selectItems value="#{clienteMb.listaProfessores}"
+													var="professor" itemLabel="#{professor.nome}"
+													itemValue="#{professor}" />
+											</h:selectOneMenu>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="exampleInputNome">Pergunta</label>
+											<h:inputText styleClass="form-control"
+												value="#{perguntaMb.pergunta.pergunta}"
+												id="exampleInputEndereco1">
+												<f:passThroughAttribute name="placeholder" value="...." />
+											</h:inputText>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="exampleInputNome">Resposta Correta</label>
+											<h:inputText styleClass="form-control"
+												value="#{perguntaMb.pergunta.correta}"
+												id="exampleInputEndereco2">
+												<f:passThroughAttribute name="placeholder" value="...." />
+											</h:inputText>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="exampleInputNome">1º Resposta Errada</label>
+											<h:inputText styleClass="form-control"
+												value="#{perguntaMb.pergunta.primeiraErrada}"
+												id="exampleInputEndereco6">
+												<f:passThroughAttribute name="placeholder" value="...." />
+											</h:inputText>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="exampleInputNome">2º Resposta Errada</label>
+											<h:inputText styleClass="form-control"
+												value="#{perguntaMb.pergunta.segundaErrada}"
+												id="exampleInputEndereco5">
+												<f:passThroughAttribute name="placeholder" value="...." />
+											</h:inputText>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="exampleInputNome">3º Resposta Errada</label>
+											<h:inputText styleClass="form-control"
+												value="#{perguntaMb.pergunta.terceiraErrada}"
+												id="exampleInputEndereco4">
+												<f:passThroughAttribute name="placeholder" value="...." />
+											</h:inputText>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="exampleInputNome">4º Resposta Errada</label>
+											<h:inputText styleClass="form-control"
+												value="#{perguntaMb.pergunta.quartaErrada}"
+												id="exampleInputQuartaErrada">
+												<f:passThroughAttribute name="placeholder" value="...." />
+											</h:inputText>
+										</div>
+										<div class="row">
+											<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+												<div class="form-group form-group-sm">
+													<span> <h:commandLink
+															styleClass="btn btn-success btn-circle btn-lg"
+															action="#{perguntaMb.salvar}">
+															<span class="glyphicon glyphicon-ok"></span>
+														</h:commandLink>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="exampleInputNome">5º Resposta Errada</label>
+											<h:inputText styleClass="form-control"
+												value="#{perguntaMb.pergunta.quintaErrada}"
+												id="exampleInputQuintaErrada">
+												<f:passThroughAttribute name="placeholder" value="...." />
+											</h:inputText>
+										</div>
+									</div>
+									<div>
+										<div class="col-md-4"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h1>Menu de Perguntas</h1>
+			<h1></h1>
+			<div class="btn-group btn-group-justified" role="group"
+				aria-label="...">
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-primary btn-outline "
+						data-toggle="modal" data-target="#myModalProxima"
+						onClick="voltarMenu()"><span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						Voltar Menu</a>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-primary btn-outline "
+						data-toggle="modal" data-target="#myModalQuestao"><span
+						class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						Cadastrar Novas Perguntas</a>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-danger btn-outline "
+						data-toggle="modal" data-target="#myModalProxima"
+						onClick="login()"><span
+						class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						Sair</a>
+				</div>
+			</div>
+			<H1></H1>
+			<!-- BARRA DE CARREGAMENTO -->
+			<div class="modal fade" id="myModalProxima" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3>Carregando</h3>
+						</div>
+						<div class="modal-body">
+							<img src="../resources/imagens/Progress_bar.gif"
+								class="img-responsive" alt="Imagem responsiva" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- BARRA DE CARREGAMENTO -->
+		</div>
+		<footer class="footer"> </footer>
+		<!--Bootstrap-->
+		<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../resources/css/css/menuprofessor.css" rel="stylesheet" />
+		<script src="../resources/js/jquery.js"></script>
+		<script src="../resources/js/mudarPagina.js"></script>
+		<script src="../resources/js/bootstrap.min.js"></script>
+	</h:form>
+</h:body>
+</html>

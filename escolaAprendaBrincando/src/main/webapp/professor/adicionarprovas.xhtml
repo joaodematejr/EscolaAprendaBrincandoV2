@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<link href="../resources/css/bootstrap-datepicker3.css" rel="stylesheet" />
+<script src="../resources/js/jquery.js"></script>
+
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title><ui:insert name="title">Cadastro de Provas</ui:insert></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="../resources/imagens/icons.png"
+		type="image/x-icon" />
+	<f:metadata>
+		<f:viewParam name="id" value="#{provaMb.editarId}" />
+		<f:event listener="#{provaMb.carregarEdicao}" type="preRenderView" />
+	</f:metadata>
+</h:head>
+<h:body>
+	<!-- BARRA DE CARREGAMENTO -->
+	<div class="modal fade" id="myModalProxima" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Carregando</h3>
+				</div>
+				<div class="modal-body">
+					<img src="../resources/imagens/Progress_bar.gif"
+						class="img-responsive" alt="Imagem responsiva" />
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- BARRA DE CARREGAMENTO -->
+	<h:form>
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-text navbar-left">
+				<a class="navbar-brand " href="#">Aprenda Brincando 2.0</a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.cpfClienteLogado}" /> </a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.nomeClienteLogado}" /> </a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1"></div>
+			<!-- /.navbar-collapse -->
+		</div>
+		</nav>
+		<div class="container">
+			<p:messages />
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Cadastro de Provas</h3>
+				</div>
+				<div class="panel-body">
+					<h:panelGroup rendered="#{not empty turmaMb.turma.id}">
+						<div class="form-group id">
+							<label>ID</label>
+							<h:inputText styleClass="form-control" readonly="true"
+								value="#{turmaMb.turma.id}" />
+						</div>
+					</h:panelGroup>
+					<h:inputHidden value="#{turmaMb.turma.id}" />
+					<div class="col-md-4">
+						<div class="form-group">
+							<legend>Professor</legend>
+							<h:selectOneMenu styleClass="form-control"
+								value="#{provaMb.prova.professor}">
+								<f:selectItem itemLabel="-" />
+								<f:selectItems value="#{clienteMb.listaProfessores}"
+									var="professor" itemLabel="#{professor.nome}"
+									itemValue="#{professor}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+						<div class="form-group">
+							<div class="form-group">
+								<legend>Data de Postagem</legend>
+								<div class='input-group date datetimepicker'>
+									<h:inputText styleClass="form-control"
+										value="#{provaMb.prova.entregar}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:inputText>
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+						<div class="form-group">
+							<div class="form-group">
+								<legend>Data para Entrega</legend>
+								<div class='input-group date datetimepicker'>
+									<h:inputText styleClass="form-control"
+										value="#{provaMb.prova.termino}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:inputText>
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+						<legend>Nivel da Prova</legend>
+						<h:selectOneMenu styleClass="form-control"
+							value="#{provaMb.prova.nivel}">
+							<f:selectItem itemLabel="-" itemValue="" />
+							<f:selectItem itemLabel="Facil" itemValue="FACIL" />
+							<f:selectItem itemLabel="Medio" itemValue="MEDIO" />
+							<f:selectItem itemLabel="Dificil" itemValue="DIFICIL" />
+						</h:selectOneMenu>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+						<div class="form-group">
+							<legend>Assunto/Tema da Prova</legend>
+							<p:inputText styleClass="form-control" id="assunto-id"
+								required="true"
+								requiredMessage="Campos em Branco, por favor Preencha todos os campos !"
+								value="#{provaMb.prova.assunto}" maxlength="1000"
+								placeholder="..." />
+						</div>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+						<div class="form-group">
+							<legend>Observação</legend>
+							<p:inputText styleClass="form-control" id="observacao-id"
+								required="true" requiredMessage=""
+								value="#{provaMb.prova.observacao}" maxlength="1000"
+								placeholder="..." />
+						</div>
+					</div>
+					<div class="form-group">
+						<legend>Perguntas</legend>
+						<div class="col-md-15">
+							<h:selectOneMenu id="uiSelecionaPergunta"
+								styleClass="form-control" value="#{provaMb.perguntaSelecionado}">
+								<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+								<f:selectItems value="#{perguntaMb.listaPerguntas}" var="per"
+									itemLabel="#{per.pergunta}" itemValue="#{per}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-15">
+							<h:dataTable styleClass="table-condensed table-hover"
+								id="uiPerguntaprova" value="#{provaMb.prova.perguntaProva}"
+								var="prova">
+								<h:column>
+									<f:facet name="header">ID</f:facet>
+									<h:outputText value="#{prova.id}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Pergunta</f:facet>
+									<h:outputText value="#{prova.pergunta}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Resposta Correta</f:facet>
+									<h:outputText value="#{prova.correta}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Alternativa Errada</f:facet>
+									<h:outputText value="#{prova.primeiraErrada}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Alternativa Errada</f:facet>
+									<h:outputText value="#{prova.segundaErrada}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Alternativa Errada</f:facet>
+									<h:outputText value="#{prova.terceiraErrada}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Alternativa Errada</f:facet>
+									<h:outputText value="#{prova.quartaErrada}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Excluir</f:facet>
+									<h:commandLink>
+										<f:attribute name="idperguntaProva" value="#{perguntaProva}" />
+										<f:ajax event="click" execute="@form" render="@form"
+											listener="#{turmaMb.excluirPerguntaProva}" />
+										<span class="glyphicon glyphicon-remove-circle"></span>
+									</h:commandLink>
+								</h:column>
+							</h:dataTable>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h1>Cadastrar Provas</h1>
+			<div class="btn-group btn-group-justified" role="group"
+				aria-label="...">
+				<div class="btn-group" role="group">
+					<button class="btn btn-danger btn-outline">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true">
+						</span> Limpar
+					</button>
+				</div>
+				<div class="btn-group" role="group">
+					<h:commandLink styleClass="btn btn-success btn-outline"
+						action="#{provaMb.salvar}" value="Salvar">
+						<span class="glyphicon glyphicon-ok" value="Salvar"></span>
+					</h:commandLink>
+				</div>
+				<div class="btn-group" role="group">
+					<h:commandLink styleClass="btn btn-info btn-outline ">
+						<f:ajax event="click" execute="uiSelecionaPergunta"
+							listener="#{provaMb.adicionarPergunta}"
+							render="uiPerguntaprova uiSelecionaPergunta" />
+						<span class=""><span class="glyphicon glyphicon-plus"
+							aria-hidden="true"> </span> Adicionar Questão</span>
+					</h:commandLink>
+				</div>
+			</div>
+			<H1></H1>
+			<div class="btn-group btn-group-justified" role="group"
+				aria-label="...">
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-primary btn-outline "
+						data-toggle="modal" data-target="#myModalProxima"
+						onClick="voltarMenu()"><span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"> </span>
+						Voltar Menu</a>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-danger btn-outline "
+						data-toggle="modal" data-target="#myModalProxima"
+						onClick="login()"><span class="glyphicon glyphicon-user"
+						aria-hidden="true"> </span> Sair</a>
+				</div>
+				<div class="btn-group" role="group"></div>
+			</div>
+		</div>
+		<footer class="footer"> </footer>
+		<!--Bootstrap-->
+
+		<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../resources/css/css/cadastroturmas.css" rel="stylesheet" />
+		<script src="../resources/js/jquery.js"></script>
+		<script src="../resources/js/mudarPagina.js"></script>
+		<link href="../resources/css/bootstrap-datetimepicker.css"
+			rel="stylesheet" />
+		<script src="../resources/js/datepicker-component.js"></script>
+		<script src="../resources/js/moment-with-locales.js"></script>
+		<script src="../resources/js/bootstrap-datetimepicker.js"></script>
+		<script src="../resources/js/bootstrap.min.js"></script>
+
+	</h:form>
+</h:body>
+</html>

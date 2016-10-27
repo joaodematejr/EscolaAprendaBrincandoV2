@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<script src="../resources/js/jquery.js"></script>
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title><ui:insert name="title">Cadastrar Turmas</ui:insert></title>
+	<link rel="icon" href="../resources/imagens/icons.png"
+		type="image/x-icon" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<f:metadata>
+		<f:viewParam name="id" value="#{turmaMb.editarId}" />
+		<f:event listener="#{turmaMb.carregarEdicao}" type="preRenderView" />
+	</f:metadata>
+</h:head>
+<h:body>
+	<f:facet name="last">
+		<h:outputStylesheet name="bootstrap.min.css" library="css"></h:outputStylesheet>
+	</f:facet>
+	<!-- BARRA DE CARREGAMENTO -->
+	<div class="modal fade" id="myModalProxima" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Carregando</h3>
+				</div>
+				<div class="modal-body">
+					<img src="../resources/imagens/Progress_bar.gif"
+						class="img-responsive" alt="Imagem responsiva" />
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- BARRA DE CARREGAMENTO -->
+	<h:form>
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-text navbar-left">
+				<a class="navbar-brand " href="#">Aprenda Brincando 2.0</a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.cpfClienteLogado}" /> </a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.nomeClienteLogado}" /> </a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1"></div>
+			<!-- /.navbar-collapse -->
+		</div>
+		</nav>
+		<div class="container">
+			<p:messages />
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Cadastro de Turmas</h3>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-3 col-sm-3 col-md-12 col-lg-12">
+						<h:panelGroup rendered="#{not empty turmaMb.turma.id}">
+							<div class="form-group id">
+								<legend>Codigo da Turma</legend>
+								<h:inputText styleClass="form-control" readonly="true"
+									value="#{turmaMb.turma.id}" />
+							</div>
+						</h:panelGroup>
+					</div>
+					<h:inputHidden value="#{turmaMb.turma.id}" />
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<legend>Professor</legend>
+								<h:selectOneMenu styleClass="form-control"
+									value="#{turmaMb.turma.professor}">
+									<f:selectItem itemLabel="-" />
+									<f:selectItems value="#{clienteMb.listaProfessores}"
+										var="professor" itemLabel="#{professor.nome}"
+										itemValue="#{professor}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<legend>Nome da Turma</legend>
+								<p:inputMask styleClass="form-control" id="turma-id"
+									required="true" requiredMessage="Faltando dados !"
+									value="#{turmaMb.turma.nomeTurma}" maxlength="100"
+									placeholder="..." />
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div>
+								<legend>Quantidade de Alunos</legend>
+								<h:panelGrid columns="1" style="margin-bottom: 20px">
+									<p:inputText id="txt3" value="#{turmaMb.turma.qAluno}" />
+									<p:slider for="txt3" step="1" />
+								</h:panelGrid>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<legend>Periodo</legend>
+							<h:selectOneMenu styleClass="form-control"
+								value="#{turmaMb.turma.turno}">
+								<f:selectItem itemLabel="-" itemValue="" />
+								<f:selectItem itemLabel="Manha" itemValue="MANHA" />
+								<f:selectItem itemLabel="Tarde" itemValue="TARDE" />
+								<f:selectItem itemLabel="Noite" itemValue="NOITE" />
+							</h:selectOneMenu>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<div class="form-group">
+									<legend>Data Inicial</legend>
+									<div class='input-group date datetimepicker'>
+										<h:inputText styleClass="form-control"
+											value="#{turmaMb.turma.dataInicio}">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+										</h:inputText>
+										<span class="input-group-addon"><span
+											class="glyphicon glyphicon-calendar"></span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<div class="form-group">
+									<legend>Data Final</legend>
+									<div class='input-group date datetimepicker'>
+										<h:inputText styleClass="form-control"
+											value="#{turmaMb.turma.dataFinal}">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+										</h:inputText>
+										<span class="input-group-addon"><span
+											class="glyphicon glyphicon-calendar"></span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<legend>Quantidade de Semestre</legend>
+							<h:selectOneMenu styleClass="form-control"
+								value="#{turmaMb.turma.semestre}">
+								<f:selectItem itemLabel="-" itemValue="" />
+								<f:selectItem itemLabel="1" itemValue="UM" />
+								<f:selectItem itemLabel="2" itemValue="DOIS" />
+								<f:selectItem itemLabel="3" itemValue="TRÊS" />
+								<f:selectItem itemLabel="4" itemValue="QUATRO" />
+							</h:selectOneMenu>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<legend>Alunos</legend>
+							<h:selectOneMenu id="uiSelecionaCliente"
+								styleClass="form-control" value="#{turmaMb.clienteSelecionado}">
+								<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+								<f:selectItems value="#{clienteMb.listaAlunos}" var="cli"
+									itemLabel="#{cli.nome}" itemValue="#{cli}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<legend>Listagem de Alunos</legend>
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<h:dataTable styleClass="table-condensed table-hover"
+								id="uiClientesturma" value="#{turmaMb.turma.clienteTurma}"
+								var="cliente">
+								<h:column>
+									<f:facet name="header">Nome</f:facet>
+									<h:outputText value="#{cliente.nome}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Excluir</f:facet>
+									<h:commandLink>
+										<f:attribute name="idCliente" value="#{cliente}" />
+										<f:ajax event="click" execute="@form" render="@form"
+											listener="#{turmaMb.excluirCliente}" />
+										<span class="glyphicon glyphicon-remove-circle"></span>
+									</h:commandLink>
+								</h:column>
+							</h:dataTable>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h1>Cadastrar Turmas</h1>
+			<div class="btn-group btn-group-justified" role="group"
+				aria-label="...">
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-danger btn-outline "><span
+						class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						Limpar</a>
+				</div>
+				<div class="btn-group" role="group">
+					<h:commandLink styleClass="btn btn-success btn-outline"
+						action="#{turmaMb.salvar}" value="Salvar">
+						<span class="glyphicon glyphicon-ok" value="Salvar"></span>
+					</h:commandLink>
+				</div>
+				<div class="btn-group" role="group">
+					<h:commandLink styleClass="btn btn-info btn-outline ">
+						<f:ajax event="click" execute="uiSelecionaCliente"
+							listener="#{turmaMb.adicionarCliente}"
+							render="uiClientesturma uiSelecionaCliente" />
+						<span class=""><span class="glyphicon glyphicon-plus"
+							aria-hidden="true"></span> Adicionar Alunos</span>
+					</h:commandLink>
+				</div>
+			</div>
+			<H1></H1>
+			<div class="btn-group btn-group-justified" role="group"
+				aria-label="...">
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-primary btn-outline "
+						data-toggle="modal" data-target="#myModalProxima"
+						onClick="voltarMenuAdm()"><span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						Voltar Menu</a>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-danger btn-outline "
+						data-toggle="modal" data-target="#myModalProxima" onClick="sair()"><span
+						class="glyphicon glyphicon-user" aria-hidden="true"></span> Sair</a>
+				</div>
+				<div class="btn-group" role="group"></div>
+			</div>
+		</div>
+		<footer class="footer"> </footer>
+		<!--Bootstrap-->
+		<link href="../resources/css/bootstrap-datetimepicker.css"
+			rel="stylesheet" />
+		<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../resources/css/css/cadastroturmas.css" rel="stylesheet" />
+		<script src="../resources/js/bootstrap.min.js"></script>
+		<script src="../resources/js/mudarPagina.js"></script>
+		<script src="../resources/js/datepicker-component2.js"></script>
+		<script src="../resources/js/moment-with-locales.js"></script>
+		<script src="../resources/js/bootstrap-datetimepicker.js"></script>
+	</h:form>
+</h:body>
+</html>

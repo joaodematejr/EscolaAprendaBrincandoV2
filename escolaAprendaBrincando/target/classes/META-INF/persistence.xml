@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="escola_ab" transaction-type="RESOURCE_LOCAL">
+
+		<!-- provedor/implementacao do JPA -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>entity.Ambiente</class>
+		<class>entity.Calendario</class>
+		<class>entity.Chamada</class>
+		<class>entity.Cliente</class>
+		<class>entity.Documento</class>
+		<class>entity.Pergunta</class>
+		<class>entity.Prova</class>
+		<class>entity.Questao</class>
+		<class>entity.Turma</class>
+
+		<properties>
+			<!-- dados da conexao -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/escola_ab" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<!-- propriedades do hibernate -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<!-- atualiza o banco, gera as tabelas se for preciso -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+	<!-- hsqldb -->
+	<persistence-unit name="hsqldb" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:testdb" />
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>

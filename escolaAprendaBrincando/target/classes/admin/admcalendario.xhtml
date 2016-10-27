@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="../resources/imagens/icons.png"
+		type="image/x-icon" />
+	<title>Calendario</title>
+</h:head>
+<h:body>
+	<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-text navbar-left">
+			<a class="navbar-brand " href="#">Aprenda Brincando 2.0</a>
+		</div>
+		<div class="navbar-text navbar-right">
+			<a class="navbar-brand " href="#"><h:outputText
+					value="#{sessaoMB.cpfClienteLogado}" /> </a>
+		</div>
+		<div class="navbar-text navbar-right">
+			<a class="navbar-brand " href="#"><h:outputText
+					value="#{sessaoMB.nomeClienteLogado}" /> </a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1"></div>
+		<!-- /.navbar-collapse -->
+	</div>
+	</nav>
+	<!-- BARRA DE CARREGAMENTO -->
+	<div class="modal fade" id="myModalProxima" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header"></div>
+				<h3 class="h3">Carregando</h3>
+				<div class="modal-body">
+					<img src="../resources/imagens/Progress_bar.gif"
+						class="img-responsive" alt="Imagem responsiva" />
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- BARRA DE CARREGAMENTO -->
+	<div class="container">
+		<!-- INICIO DO CALENDARIO -->
+		<h:form id="formCalendario">
+			<p:growl id="msgGrowl" showDetail="true" />
+			<h:panelGrid columnClasses="value">
+				<h3 style="margin-top: 0">Calendario Escolar</h3>
+				<p:schedule id="idCalendario"
+					value="#{calendarioMb.calendarioModel}"
+					widgetVar="calendarioEscolar" timeZone="America/Sao_Paulo">
+					<p:ajax event="dateSelect" listener="#{calendarioMb.novaData}"
+						update="calendarioDetalhe"
+						oncomplete="PF('caixaCalendario').show();" />
+					<p:ajax event="eventSelect"
+						listener="#{calendarioMb.dataSelecionado}"
+						update="calendarioDetalhe"
+						oncomplete="PF('caixaCalendario').show();" />
+					<p:ajax event="eventMove" listener="#{calendarioMb.moverData}"
+						update="idCalendario" />
+					<p:ajax event="eventResize"
+						listener="#{calendarioMb.redimensinarData}" update="idCalendario" />
+				</p:schedule>
+			</h:panelGrid>
+		</h:form>
+		<p:dialog widgetVar="caixaCalendario" header="Caledario"
+			resizable="false" modal="true" showEffect="clip" hideEffect="drop">
+			<p:outputPanel id="calendarioDetalhe">
+				<h:panelGrid columns="2">
+					<h:form>
+						<p:messages id="mmm" autoUpdate="true"></p:messages>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Titulo :</label>
+							<p:inputText id="exampleInputEmail1" class="form-control"
+								value="#{calendarioMb.calendario.titulo}" />
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail3">Ambiente :</label>
+							<div class="form-group">
+								<h:selectOneMenu id="exampleInputEmail3"
+									styleClass="form-control"
+									value="#{calendarioMb.calendario.ambiente}">
+									<f:selectItem itemLabel="-" />
+									<f:selectItems value="#{ambienteMb.listaAmbientes}"
+										var="ambiente" itemLabel="#{ambiente.nome}"
+										itemValue="#{ambiente}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail2">Turmas :</label>
+							<div class="form-group">
+								<h:selectOneMenu id="exampleInputEmail2"
+									styleClass="form-control"
+									value="#{calendarioMb.calendario.turma}">
+									<f:selectItem itemLabel="-" />
+									<f:selectItems value="#{turmaMb.listarTurmas}" var="turma"
+										itemLabel="#{turma.nomeTurma}" itemValue="#{turma}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputProf">Docente :</label>
+							<div class="form-group">
+								<h:selectOneMenu id="inputProf" styleClass="form-control"
+									value="#{calendarioMb.calendario.professor}">
+									<f:selectItem itemLabel="-" />
+									<f:selectItems value="#{clienteMb.listaProfessores}"
+										var="professor" itemLabel="#{professor.nome}"
+										itemValue="#{professor}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail4">Descrição :</label>
+							<p:inputText id="exampleInputEmail4" class="form-control"
+								value="#{calendarioMb.calendario.descricao}" autoResize="true" />
+						</div>
+						<div class="form-group">
+							<label for="from">Data Inicial :</label>
+							<p:calendar class="form-control2" id="from"
+								value="#{calendarioMb.calendario.inicio}"
+								pattern="dd/MM/yyyy HH:mm" />
+						</div>
+						<div class="form-group">
+							<label for="to">Data Final :</label>
+							<p:calendar class="form-control2" id="to"
+								value="#{calendarioMb.calendario.fim}"
+								pattern="dd/MM/yyyy HH:mm" />
+						</div>
+						<div class="row">
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="form-group form-group-sm">
+									<p:commandButton value="Salvar"
+										actionListener="#{calendarioMb.salvar}"
+										update="formCalendario:idCalendario, mmm"
+										oncomplete="PF('caixaCalendario').hide();" />
+								</div>
+							</div>
+						</div>
+					</h:form>
+				</h:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+		<!-- //FINAL DO CALENDARIO -->
+	</div>
+	<footer class="footer">
+	<h1>Calendario</h1>
+	</footer>
+	<footer class="container">
+	<div class="btn-group btn-group-justified" role="group"
+		aria-label="...">
+		<div class="btn-group" role="group">
+			<a type="button" class="btn btn-primary btn-outline "
+				data-toggle="modal" data-target="#myModalProxima"
+				onClick="voltarMenuAdm()"> <span
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Voltar
+				Menu
+			</a>
+		</div>
+		<div class="btn-group" role="group">
+			<a type="button" class="btn btn-primary btn-outline "
+				data-toggle="modal" data-target="#myModalProximaa"><span
+				class="glyphicon glyphicon-list" aria-hidden="true"></span> Listar Agenda</a>
+		</div>
+		<div class="btn-group" role="group">
+			<a type="button" class="btn btn-danger btn-outline "
+				data-toggle="modal" data-target="#myModalProxima" onClick="sair()">
+				<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+				Sair
+			</a>
+		</div>
+	</div>
+	</footer>
+	<footer class="footer"></footer>
+	<!--INICIO Bootstrap-->
+	<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="../resources/css/css/admcalendario.css" rel="stylesheet" />
+	<script src="../resources/js/mudarPagina.js"></script>
+	<script src="../resources/js/pt-BR.js"></script>
+	<script src="../resources/js/bootstrap.min.js"></script>
+	<script src="../resources/js/modal.js"></script>
+</h:body>
+</html>

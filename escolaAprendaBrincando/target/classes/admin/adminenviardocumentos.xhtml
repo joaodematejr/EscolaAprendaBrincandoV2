@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:metadata>
+	<f:viewParam name="idturma" value="#{albumMb.turma}" required="true"
+		requiredMessage="Clique no botão adicionar do album de uma turma" />
+	<f:viewParam name="idimagem" value="#{albumMb.foto}" />
+</f:metadata>
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="../resources/imagens/icons.png"
+		type="image/x-icon" />
+	<title><ui:insert name="title">Enviar Documentos</ui:insert></title>
+</h:head>
+<h:body>
+	<!-- BARRA DE CARREGAMENTO -->
+	<div class="modal fade" id="myModalProxima" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Carregando</h3>
+				</div>
+				<div class="modal-body">
+					<img src="../resources/imagens/Progress_bar.gif"
+						class="img-responsive" alt="Imagem responsiva" />
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- BARRA DE CARREGAMENTO -->
+	<h:form enctype="multipart/form-data">
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-text navbar-left">
+				<a class="navbar-brand " href="#">Aprenda Brincando 2.0</a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.cpfClienteLogado}" /> </a>
+			</div>
+			<div class="navbar-text navbar-right">
+				<a class="navbar-brand " href="#"><h:outputText
+						value="#{sessaoMB.nomeClienteLogado}" /> </a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1"></div>
+			<!-- /.navbar-collapse -->
+		</div>
+		</nav>
+		<div class="container">
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Documento</h3>
+				</div>
+				<div class="panel-body">
+
+					<h:panelGroup rendered="#{not empty albumMb.foto.id}">
+						<div class="form-group id">
+							<label>ID</label>
+							<h:inputText styleClass="form-control" readonly="true"
+								value="#{albumMb.foto.id}" />
+						</div>
+					</h:panelGroup>
+					<h:inputHidden value="#{albumMb.foto.id}" />
+					<h:inputHidden value="#{albumMb.foto.nome}" />
+					<h:inputHidden value="#{albumMb.turma}" />
+					<div class="form-group">
+						<label>Foto</label>
+						<h:inputFile styleClass="form-control"
+							value="#{albumMb.fotoUploaded}" />
+					</div>
+					<h:graphicImage rendered="#{not empty albumMb.foto.nome}"
+						styleClass="img-responsive"
+						name="img/uploads/#{albumMb.foto.nome}" />
+
+					<div class="form-group">
+						<label for="exampleInputNome">Comentario</label>
+						<h:inputText styleClass="form-control" style="height:150px"
+							rows="10" value="#{albumMb.foto.comentario}" id="exampleInputCpf" />
+					</div>
+					<div></div>
+				</div>
+			</div>
+			<h1>Upload de Imagens</h1>
+			<div class="btn-group btn-group-justified" role="group"
+				aria-label="...">
+				<div class="btn-group" role="group">
+					<h:commandButton styleClass="btn btn-success btn-outline"
+						action="#{albumMb.salvar}" onClick="voltarMenu()" value="Salvar" />
+				</div>
+				<div class="btn-group" role="group">
+					<button type="reset" class="btn btn btn-danger btn-outline ">Limpar</button>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-primary btn-outline "
+						data-toggle="modal" data-target="#myModalProxima"
+						onClick="voltarMenuAdm()">Voltar Menu</a>
+				</div>
+			</div>
+		</div>
+		<footer class="footer"> </footer>
+		<!--Bootstrap-->
+		<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../resources/css/css/adm.css" rel="stylesheet" />
+		<script src="../resources/js/jquery.js"></script>
+		<script src="../resources/js/mudarPagina.js"></script>
+		<script src="../resources/js/bootstrap.min.js"></script>
+	</h:form>
+</h:body>
+</html>

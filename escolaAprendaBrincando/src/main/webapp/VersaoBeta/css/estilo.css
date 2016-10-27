@@ -1,0 +1,169 @@
+
+body {
+	background-image: url("../imagens/fundo.png");
+	background-size:cover;
+	margin:0;
+	padding:0;
+
+}
+
+#container {
+			width: 100%;
+			font-family: "Helvetica", "Arial", "Times New Roman";
+			margin: 0 auto;
+			float: left;
+		}
+		
+		
+		#cabecalho {
+					float:left;
+			width:100%;
+			height:100%;
+			text-align:center;
+		}
+		
+		#cabecalho h1 {
+			color: #FFFFFF;
+			
+			font-size: 36px;
+			width: 35%;
+			float: left;
+			margin-left:5%;
+			font-weight:normal;
+			text-align: left;
+			padding-left: 5%;
+			padding-top: 0%;
+		}
+		
+				#menu {
+			float:left;
+			width:100%;
+			height:100%;
+			background-repeat: no-repeat;
+			background-position:center;
+			padding-top: 2%;
+			padding-bottom: 4%;
+			margin-top:0%;	
+			background-image: url("../imagens/madeira_grande.gif"); 
+			background-size:contain;
+					text-align:center;
+		
+		}
+		
+		#menu_itens {
+			float: left;
+			width: 100%;
+			text-align: center;
+			/*margin-right: 50%;*/
+			margin-top: 2%;
+			border-radius: 5px;
+		}
+		
+		#menu_itens ul {
+			padding:0;
+			margin:0;
+			list-style:none;
+		}
+		
+		#menu_itens ul li {
+			display: inline;
+		}
+		
+		#menu_itens ul li a {
+			display: inline-block;
+			padding-left: 10px;
+			padding-right: 10px;
+			text-decoration: none;
+			font-size: 40px;
+			color:#EBEBEB;
+			padding-top: 2px;
+			padding-bottom: 2px;
+		}
+		#menu_itens ul li a:hover {
+			color: #00CC00;
+			
+		}
+		.ativo {
+			color: #472400 !important;
+			
+		}
+		
+		.img_madeira {
+			float: left;
+			margin-left: 0;
+			margin-right: 0;
+			margin-top: 0;
+			width: 60%;
+			height: 60%;
+			float: left;
+			padding-top:5%;
+			padding-bottom: 5%;
+			text-align:center;
+			
+			
+		}
+
+		#conteudo {
+			float:left;
+			width:100%;
+			height:100%;
+				text-align:center;
+				padding-bottom: 5%;
+		}
+		#esquerda {
+			
+			height:100%;
+			margin-right:0;
+			padding-top:3%;
+			color: #FFFFFF;
+			font-size: 18px;
+			width: 70%;
+			float: left;
+			margin-left:15%;
+			margin-right:15%;
+			font-weight:normal;
+			text-align: center;
+
+		}
+		
+		#esquerda h1 {
+			text-align: center;
+			padding-top: 10%;
+			color: #000000;
+			font-size:40px;
+
+			}
+			
+		/*#esquerda hr {
+			
+			float: left;
+			border-color:#FFFFFF;
+			height:100%;
+			width:100%;
+			
+			}*/
+			
+		.img_bandeira {
+			margin-right: 0;
+			margin-top: 0;
+			width: 100%;
+			height: 100%;
+			float: left;
+			padding-top:5%;
+			padding-bottom: 5%;
+			text-align:center;
+		
+			
+		}
+		.img_logo {
+			margin-left: 0%;
+			margin-right: 0;
+			margin-top: 0;
+			width: 100%;
+			height: 100%;
+			float: left;
+			text-align:center;
+			margin-bottom: 5%;
+		}
+		
+	

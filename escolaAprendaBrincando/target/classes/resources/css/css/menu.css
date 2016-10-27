@@ -1,0 +1,99 @@
+body {
+	background-color: #FFFFFF;
+}
+
+.alert-danger {
+	color: #0e0d0d;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+	margin-left: 0;
+	padding-right: 96px;
+	padding-left: 80px;
+	text-align: center;
+}
+
+.ui-messages-error, .ui-message-error {
+	color: #000000;
+	background-color: #f2dede;
+	border-color: #eed3d7;
+}
+
+.container {
+	width: 350px;
+	margin-top: 120px;
+	margin-left: :auto;
+	margin-right: auto;
+}
+
+.value {
+	width: 1000px;
+}
+
+.container-fluid {
+	text-align: center;
+}
+
+.btn {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.table {
+	margin-top: 20px;
+}
+
+.footer {
+	text-align: center;
+	margin-top: 100px;
+	margin-left: :auto;
+	margin-right: auto;
+}
+
+.form-control {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.imagem {
+	width: 100px;
+	height: 90px;
+	margin: 10px auto 30px;
+	background-size: cover;
+}
+
+.btn {
+	margin-left: :auto;
+	margin-right: auto;
+}
+
+.btn-outline {
+	background-color: transparent;
+	color: inherit;
+	transition: all .5s;
+}
+
+.btn-primary.btn-outline {
+	color: #428bca;
+}
+
+.btn-success.btn-outline {
+	color: #5cb85c;
+}
+
+.btn-info.btn-outline {
+	color: #5bc0de;
+}
+
+.btn-warning.btn-outline {
+	color: #f0ad4e;
+}
+
+.btn-danger.btn-outline {
+	color: #d9534f;
+}
+
+.btn-primary.btn-outline:hover, .btn-success.btn-outline:hover,
+	.btn-info.btn-outline:hover, .btn-warning.btn-outline:hover,
+	.btn-danger.btn-outline:hover {
+	color: #fff;
+}

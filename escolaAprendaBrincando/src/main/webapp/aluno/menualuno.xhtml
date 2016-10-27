@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="../resources/imagens/icons.png"
+	type="image/x-icon" />
+<title>Aluno</title>
+</head>
+<h:body>
+	<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-text navbar-left">
+			<a class="navbar-brand " href="#">Aprenda Brincando 2.0</a>
+		</div>
+		<div class="navbar-text navbar-right">
+			<a class="navbar-brand " href="#"><h:outputText
+					value="#{sessaoMB.cpfClienteLogado}" /> </a>
+		</div>
+		<div class="navbar-text navbar-right">
+			<a class="navbar-brand " href="#"><h:outputText
+					value="#{sessaoMB.nomeClienteLogado}" /> </a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1"></div>
+		<!-- /.navbar-collapse -->
+	</div>
+	</nav>
+	<!-- BARRA DE CARREGAMENTO -->
+	<div class="modal fade" id="myModalProxima" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Carregando</h3>
+				</div>
+				<div class="modal-body">
+					<img src="../resources/imagens/Progress_bar.gif"
+						class="img-responsive" alt="Imagem responsiva" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- BARRA DE CARREGAMENTO -->
+	<!-- DOCUMENTOS -->
+	<div class="modal fade" id="myModalDocumentos" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Lista - Documentos</h4>
+				</div>
+				<div class="modal-bodyTurmas">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Documentos</h3>
+						</div>
+						<div class="col-md-9"></div>
+						<div class="panel-body">
+							<table styleClass="table table table-hover table table-bordered">
+								<h:dataTable
+									styleClass="table table table-hover table table-bordered"
+									value="#{turmaMb.listarTurmas}" var="turma">
+									<h:column>
+										<f:facet name="header">Codigo da Turma</f:facet>
+										<h:outputText value="#{turma.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Professor</f:facet>
+										<h:outputText value="#{turma.professor.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Documento</f:facet>
+										<h:link styleClass="btn btn-success btn-xs btn-block"
+											outcome="alunosarquivos">
+											<f:param name="idturma" value="#{turma.id}" />
+											<span class="glyphicon glyphicon-level-up"></span>
+										</h:link>
+									</h:column>
+									<h:column>
+										<f:facet name="header">Visualizar</f:facet>
+										<button type="button" class="btn btn-primary btn-xs btn-block"
+											data-toggle="modal" data-target="#myModalTurma#{turma.id}"
+											aria-label="Alinhar na esquerda">
+											<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+										</button>
+										<div class="modal fade bd-example-modal-lg"
+											id="myModalTurma#{turma.id}" tabindex="-1" role="dialog"
+											aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header"></div>
+													<div class="modal-body">
+														<div class="panel panel-info">
+															<div class="panel-heading">
+																<h3 class="panel-title">
+																	<h:outputText value="#{turma.nomeTurma}" />
+																</h3>
+															</div>
+															<div class="panel-body">
+																<div class="row">
+																	<div class=" col-md-9 col-lg-9 ">
+																		<table class="table table-user-information">
+																			<tbody>
+																				<tr>
+																					<td>Professor:</td>
+																					<td><h:outputText
+																							value="#{turma.professor.nome}" /></td>
+																				</tr>
+																				<tr>
+																					<td>Professor:</td>
+																					<td><h:outputText
+																							value="#{turma.professor.email}" /></td>
+																				</tr>
+																				<tr>
+																					<td>Quantidade de Alunos:</td>
+																					<td><h:outputText value="#{turma.qAluno}" /></td>
+																				</tr>
+																				<tr>
+																					<td>Periodo:</td>
+																					<td><h:outputText value="#{turma.turno}" /></td>
+																				</tr>
+																				<tr>
+																					<td>Quantidade de Semestre:</td>
+																					<td><h:outputText value="#{turma.semestre}" /></td>
+																				</tr>
+																				<tr>
+																					<td>Data Para Entrega:</td>
+																					<td></td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+																<div class="panel-footer">
+																	<span class="pull-right"> <a
+																		class="btn btn-sm btn-danger" data-dismiss="modal"
+																		aria-label="Close"><i
+																			class="glyphicon glyphicon-remove"></i></a>
+																	</span>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</h:column>
+								</h:dataTable>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- DOCUMENTOS -->
+	<!-- LISTAR DE PROVAS INICIO -->
+	<div class="modal fade" id="myModalAgenda" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Agenda</h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Sua Agenda</h3>
+						</div>
+						<div class="col-md-9"></div>
+						<div class="panel-body">
+							<div class="agenda">
+								<div class="table-responsive">
+									<h:dataTable value="#{calendarioMb.listaCalendarios}"
+										var="calendario"
+										styleClass="table table-condensed table-bordered table table-hover">
+										<h:column>
+											<div class="agenda-date active" rowspan="0">
+												<div class="dayofmonth">
+													<f:facet name="header">Data</f:facet>
+													<h:outputText value="#{calendario.inicio}">
+														<f:convertDateTime pattern="dd" />
+													</h:outputText>
+												</div>
+												<div class="dayofweek">
+													<h:outputText value="#{calendario.inicio}">
+														<f:convertDateTime pattern="EEEEEEEE" />
+													</h:outputText>
+												</div>
+												<div class="shortdate text-muted">
+													<h:outputText value="#{calendario.inicio}">
+														<f:convertDateTime pattern="MMMMM,yyyy" />
+													</h:outputText>
+												</div>
+											</div>
+										</h:column>
+										<h:column>
+											<f:facet name="header">Horario</f:facet>
+											<h:outputText value="#{calendario.inicio}">
+												<f:convertDateTime pattern="h:mm a" />
+											</h:outputText>
+												-
+												<h:outputText value="#{calendario.fim}">
+												<f:convertDateTime pattern="h:mm a" />
+											</h:outputText>
+										</h:column>
+										<h:column>
+											<f:facet name="header">Professor</f:facet>
+											<h:outputText value="#{calendario.professor.nome}">
+											</h:outputText>
+										</h:column>
+										<h:column>
+											<f:facet name="header">Turma</f:facet>
+											<h:outputText value="#{calendario.turma.nomeTurma}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">Ambiente</f:facet>
+											<h:outputText value="#{calendario.ambiente.nome}" />
+										</h:column>
+									</h:dataTable>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PERGUNTAS -->
+	<div class="modal fade" id="myModalPerguntas" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Lista - Perguntas</h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Perguntas</h3>
+						</div>
+						<div class="col-md-9"></div>
+						<div class="panel-body">
+							<table styleClass="table table table-hover">
+								<h:dataTable
+									styleClass="table table table-hover table table-bordered"
+									value="#{provaMb.listaProva}" var="prova">
+									<h:column>
+										<f:facet name="header">Id Prova</f:facet>
+										<h:outputText value="#{prova.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Professor</f:facet>
+										<h:outputText value="#{prova.professor.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Ações</f:facet>
+										<span> <h:link styleClass="btn btn-info"
+												outcome="provaalunos">
+												<span class="glyphicons glyphicons-send"></span>
+												<span>Responder Prova</span>
+												<f:param name="id" value="#{prova.id}" />
+											</h:link>
+										</span>
+										<span> </span>
+									</h:column>
+								</h:dataTable>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PERGUNTAS -->
+	<div class="container">
+		<img src="../resources/imagens/logo.png" class="img-responsive2"
+			alt="Imagem responsiva" />
+		<!-- BOTAO -->
+		<h1>Painel do Aluno</h1>
+		<h1></h1>
+		<div class="btn-group btn-group-justified" role="group"
+			aria-label="...">
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-primary btn-outline "
+					data-toggle="modal" data-target="#myModalPerguntas"><span
+					class="glyphicon glyphicon-check" aria-hidden="true"></span>
+					Responder Avaliacao</a>
+			</div>
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-primary btn-outline "
+					data-toggle="modal" data-target="#myModalDocumentos"><span
+					class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+					Documentos</a>
+			</div>
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-primary btn-outline "
+					data-toggle="modal" data-target="#myModalAgenda"><span
+					class="glyphicon glyphicon-list" aria-hidden="true"></span>
+					Consultar Agenda</a>
+			</div>
+		</div>
+		<h1></h1>
+		<div class="btn-group btn-group-justified" role="group"
+			aria-label="...">
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-primary btn-outline "><span
+					class="" aria-hidden="true" data-toggle="modal"
+					data-target="#myModalProxima" onClick="agendaPDF()"></span><span
+					class="glyphicon glyphicon-send" aria-hidden="true"></span> Enviar
+					Agenda via E-mail </a>
+			</div>
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-primary btn-outline "
+					data-toggle="modal" data-target="#myModalProxima"
+					onClick="agendaPDF()"><span
+					class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+					Salvar Agenda PDF</a>
+			</div>
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-danger btn-outline "
+					data-toggle="modal" data-target="#myModalProxima" onClick="sair()"><span
+					class="glyphicon glyphicon-user" aria-hidden="true"></span> Sair</a>
+			</div>
+		</div>
+	</div>
+	<footer class="footer"> </footer>
+	<!--Bootstrap-->
+	<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="../resources/css/css/menuprincipal.css" rel="stylesheet" />
+	<script src="../resources/js/jquery.js"></script>
+	<script src="../resources/js/mudarPagina.js"></script>
+	<script src="../resources/js/bootstrap.min.js"></script>
+</h:body>
+</html>

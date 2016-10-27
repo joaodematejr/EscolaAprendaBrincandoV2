@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="../resources/imagens/icons.png"
+		type="image/x-icon" />
+	<title>Login</title>
+</h:head>
+<h:body>
+	<div class="container">
+		<h:form id="form" prependId="false">
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Autenticação de Usuario</h3>
+					</div>
+					<div class="imagem">
+						<img src="resources/imagens/usuarioLogin.png"
+							class="img-responsive" alt="Imagem responsiva" />
+					</div>
+					<h:outputText styleClass="alert alert-danger"
+						value="Usuário ou Senha inválido!" rendered="#{param.erro}" />
+					<div class="form-group">
+						<p:message for="username" display="username" />
+						<p:inputText id="username" styleClass="form-control"
+							required="true" requiredMessage="E-mail obrigatório !">
+							<f:passThroughAttribute name="placeholder" value="E-mail" />
+						</p:inputText>
+					</div>
+					<div class="form-group">
+						<p:message for="password" display="password" />
+						<p:password id="password" styleClass="form-control"
+							required="true" requiredMessage="Senha obrigatória !">
+							<f:passThroughAttribute name="placeholder" value="Senha" />
+						</p:password>
+					</div>
+					<!-- Indica uma ação bem-sucedida ou positiva -->
+					<p:commandButton styleClass="btn btn-success btn-sm btn-block "
+						value="Entrar" action="#{loginManager.login}" ajax="false" />
+					<!-- Indica que o cuidado deve ser tomado com esta ação -->
+					<button type="button"
+						class="btn btn-danger btn-sm btn-block btn-lg">Esqueceu a
+						Senha ?</button>
+				</div>
+			</div>
+		</h:form>
+	</div>
+	<footer class="footer"></footer>
+	<!--Bootstrap-->
+	<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="resources/css/css/menu.css" rel="stylesheet" />
+	<script src="resources/js/bootstrap.min.js"></script>
+</h:body>
+</html>

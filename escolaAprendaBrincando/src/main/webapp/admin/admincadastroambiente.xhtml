@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="../resources/imagens/icons.png"
+		type="image/x-icon" />
+	<title>Ambiente de sala</title>
+</h:head>
+<h:body>
+	<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-text navbar-left">
+			<a class="navbar-brand " href="#">Aprenda Brincando 2.0</a>
+		</div>
+		<div class="navbar-text navbar-right">
+			<a class="navbar-brand " href="#"><h:outputText
+					value="#{sessaoMB.cpfClienteLogado}" /> </a>
+		</div>
+		<div class="navbar-text navbar-right">
+			<a class="navbar-brand " href="#"><h:outputText
+					value="#{sessaoMB.nomeClienteLogado}" /> </a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1"></div>
+		<!-- /.navbar-collapse -->
+	</div>
+	</nav>
+	<div class="container">
+		<!-- BARRA DE CARREGAMENTO -->
+		<div class="modal fade" id="myModalProxima" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>Carregando</h3>
+					</div>
+					<div class="modal-body">
+						<img src="../resources/imagens/Progress_bar.gif"
+							class="img-responsive" alt="Imagem responsiva" />
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //BARRA DE CARREGAMENTO -->
+		<p:messages />
+		<f:metadata>
+			<f:viewParam name="id" value="#{ambienteMb.editarId}" />
+ +			<f:event listener="#{ambienteMb.carregarEdicao}"
+				type="preRenderView" />
+ +			</f:metadata>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Ambiente de sala</h3>
+			</div>
+			<div class="panel-body">
+				<h:form id="formulario">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="form-group">
+								<p:outputLabel for="Nome-id" value="Nome" />
+								<p:inputText styleClass="form-control" id="Nome-id"
+									value="#{ambienteMb.ambiente.nome}" maxlength="100"
+									required="true" requiredMessage="" />
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="form-group">
+								<p:outputLabel for="Descricao-id" value="Descrição" />
+								<p:inputText styleClass="form-control" id="Descricao-id"
+									value="#{ambienteMb.ambiente.descricao}" maxlength="100"
+									required="true" requiredMessage="Existem Campos em Branco!" />
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="form-group">
+								<h:outputLabel for="minMax" value="Quantidade" />
+								<p:spinner id="minMax" value="#{ambienteMb.ambiente.quantidade}"
+									min="0" max="100" />
+							</div>
+
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<h:commandLink styleClass="btn btn-success btn-circle btn-lg"
+								action="#{ambienteMb.salvar}">
+								<span class="glyphicon glyphicon-ok"></span>
+							</h:commandLink>
+							<button type="reset" class="btn btn-danger btn-circle btn-lg">
+								<i class="glyphicon glyphicon-remove"></i>
+							</button>
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
+		<div class="btn-group btn-group-justified" role="group"
+			aria-label="...">
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-primary btn-outline "
+					data-toggle="modal" data-target="#myModalProxima"
+					onClick="voltarMenuAdm()"><span
+					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					Voltar Menu</a>
+			</div>
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-primary btn-outline "
+					data-toggle="modal" data-target="#myModalProxima"
+					onClick="adminlistaambiente()"><span
+					class="glyphicon glyphicon-list" aria-hidden="true"></span>
+					Listar Ambientes</a>
+			</div>
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-danger btn-outline "
+					data-toggle="modal" data-target="#myModalProxima" onClick="sair()"><span
+					class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					Sair</a>
+			</div>
+		</div>
+	</div>
+	<footer class="footer"> </footer>
+	<!--Bootstrap-->
+	<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="../resources/css/css/admincadastroambiente.css"
+		rel="stylesheet" />
+	<script src="../resources/js/jquery.js"></script>
+	<script src="../resources/js/mudarPagina.js"></script>
+	<script src="../resources/js/bootstrap.min.js"></script>
+</h:body>
+</html>

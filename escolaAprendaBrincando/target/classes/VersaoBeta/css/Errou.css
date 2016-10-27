@@ -1,0 +1,86 @@
+@font-face{
+	font-family: 'bombing';
+	src: url(../fonte/ufonts.com_littlebits.ttf);
+}
+
+		body {
+			background-image: url("../imagens/fundo_novo.gif");
+			background-repeat: no-repeat;
+			background-size:cover;
+			margin:auto;
+			font-family: 'bombing';
+			src: url(../fonte/ufonts.com_littlebits.ttf);
+		
+		}
+		#menu {
+			width:auto;
+			height:auto;
+			background-repeat:no-repeat;
+			padding-top: auto;
+			padding-bottom: 20%;
+			margin-top:-15%;	
+			background-image: url("../imagens/madeira_grande.gif"); 
+			background-size:contain;
+			background-color
+		}
+		
+		#conteudo :hover {
+			color: #FF0000;
+		}
+		#conteudo {
+			color: #3366FF !important;	
+		}
+
+		#rodape {
+			width: auto%;
+			margin-top: 30%;
+			margin-left:80%;
+			text-align: center;
+			background-repeat: no-repeat;
+			background-position: center;
+			color: #FC0000;		
+		}
+		.balao {
+		margin-top: 16%;
+			margin-left:23%;
+			float:left;
+			background-color:#FF0000;
+			border-top:20px solid #FF0000;
+			border-left:50px solid transparent;
+			background-clip: padding-box;
+			padding: 0 15px 15px 5px;
+			font-size:35px;
+			border-radius: 30px;
+			}
+			
+			#animal {
+			margin-top: -53%;
+			margin-left:-65%;
+			width: auto%;
+			height: auto;
+			padding-top: 50%;
+			background-image: url("../imagens/0.jpg"); 
+			background-size:20% 80%;
+			background-repeat: no-repeat;
+			background-position: center;
+			}
+			#div_informacoes {
+			margin-top: -3%;
+			float: left;
+}
+			.pontuacao {
+			width: 100%;
+			margin-left: 90%;
+			margin-top: -465%;
+			float: left;
+			font-size: 35px;
+			font-weight: bold;
+			text-align: center;
+			color:#0000FF
+}
+	
+
+			
+
+	
+	

@@ -1,0 +1,135 @@
+body {
+	background-color: #FFFFFF;
+}
+
+.input-group-addon, .input-group-btn {
+	width: 10px;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.modal-header {
+	text-align: center;
+}
+
+.ui-messages-info, .ui-message-info {
+	color: #0c0c0c;
+	background-color: #A2FB9E;
+	border-color: #0c0c0c;
+}
+
+.ui-messages-info-icon {
+	background-position: 29px;
+}
+
+.container-fluid {
+	text-align: center;
+}
+
+.container {
+	text-align: center;
+	width: 900px;
+	margin-top: 10px;
+	margin-left: :auto;
+	margin-right: auto;
+}
+
+.footer {
+	text-align: center;
+	margin-top: 100px;
+	margin-left: :auto;
+	margin-right: auto;
+}
+
+.table {
+	margin-top: 20px;
+}
+
+.form-control {
+	margin-top: -2px;
+	margin-bottom: 10px;
+}
+
+.imagem {
+	width: 100px;
+	height: 90px;
+	margin: 10px auto 30px;
+	background-size: cover;
+}
+
+.btn {
+	margin-left: :auto;
+	margin-right: auto;
+}
+
+.btn-outline {
+	background-color: transparent;
+	color: inherit;
+	transition: all .5s;
+}
+
+.btn-primary.btn-outline {
+	color: #428bca;
+}
+
+.btn-success.btn-outline {
+	color: #5cb85c;
+}
+
+.btn-info.btn-outline {
+	color: #5bc0de;
+}
+
+.btn-warning.btn-outline {
+	color: #f0ad4e;
+}
+
+.btn-danger.btn-outline {
+	color: #d9534f;
+}
+
+.btn-primary.btn-outline:hover, .btn-success.btn-outline:hover,
+	.btn-info.btn-outline:hover, .btn-warning.btn-outline:hover,
+	.btn-danger.btn-outline:hover {
+	color: #fff;
+}
+
+.select-one-menu .ui-inputfield {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	padding: 0px;
+}
+
+.ui-messages-error, .ui-message-error {
+	color: #0c0c0c;
+	background-color: #f2dede;
+	border-color: #0c0c0c;
+}
+
+.btn-circle {
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	padding: 6px 0;
+	font-size: 12px;
+	line-height: 1.428571429;
+	border-radius: 15px;
+}
+
+.btn-circle.btn-lg {
+	width: 50px;
+	height: 50px;
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.33;
+	border-radius: 25px;
+}
+
+.btn-circle.btn-xl {
+	width: 70px;
+	height: 70px;
+	padding: 10px 16px;
+	font-size: 24px;
+	line-height: 1.33;
+	border-radius: 35px;
+}

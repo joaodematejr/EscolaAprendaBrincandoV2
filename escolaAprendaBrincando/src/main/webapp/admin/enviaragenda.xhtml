@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<script src="../resources/js/jquery.js"></script>
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="../resources/imagens/icons.png"
+		type="image/x-icon" />
+	<title>Enviar Agenda</title>
+</h:head>
+<h:body>
+	<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-text navbar-left">
+			<a class="navbar-brand " href="#">Aprenda Brincando 2.0</a>
+		</div>
+		<div class="navbar-text navbar-right">
+			<a class="navbar-brand " href="#"><h:outputText
+					value="#{sessaoMB.cpfClienteLogado}" /> </a>
+		</div>
+		<div class="navbar-text navbar-right">
+			<a class="navbar-brand " href="#"><h:outputText
+					value="#{sessaoMB.nomeClienteLogado}" /> </a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1"></div>
+		<!-- /.navbar-collapse -->
+	</div>
+	</nav>
+	<div class="modal fade" id="myModalListarEventos" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Agenda</h4>
+				</div>
+				<div id="imprimir" class="modal-body">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Agenda Geral</h3>
+						</div>
+						<div class="col-md-9"></div>
+						<div class="panel-body">
+							<div class="agenda">
+								<div class="table-responsive">
+									<h:dataTable value="#{calendarioMb.listaCalendarios}"
+										var="calendario"
+										styleClass="table table-condensed table-bordered table table-hover">
+										<h:column>
+											<div class="agenda-date active" rowspan="0">
+												<div class="dayofmonth">
+													<f:facet name="header" class="texto1">Data</f:facet>
+													<h:outputText value="#{calendario.inicio}">
+														<f:convertDateTime pattern="dd" />
+													</h:outputText>
+												</div>
+												<div class="dayofweek">
+													<h:outputText value="#{calendario.inicio}">
+														<f:convertDateTime pattern="EEEEEEEE" />
+													</h:outputText>
+												</div>
+												<div class="shortdate text-muted">
+													<h:outputText value="#{calendario.inicio}">
+														<f:convertDateTime pattern="MMMMM,yyyy" />
+													</h:outputText>
+												</div>
+											</div>
+										</h:column>
+										<h:column>
+											<f:facet name="header">Horario</f:facet>
+											<h:outputText value="#{calendario.inicio}">
+												<f:convertDateTime pattern="h:mm a" />
+											</h:outputText>
+												-
+												<h:outputText value="#{calendario.fim}">
+												<f:convertDateTime pattern="h:mm a" />
+											</h:outputText>
+										</h:column>
+										<h:column>
+											<f:facet name="header">Descrição</f:facet>
+											<h:outputText value="#{calendario.descricao}">
+											</h:outputText>
+										</h:column>
+										<h:column>
+											<f:facet name="header">Turma</f:facet>
+											<h:outputText value="#{calendario.turma.nomeTurma}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">Ambiente</f:facet>
+											<h:outputText value="#{calendario.ambiente.nome}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">Professor</f:facet>
+											<h:outputText value="#{calendario.professor.nome}" />
+										</h:column>
+									</h:dataTable>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button id="btn" type="button"
+						class="btn btn-danger btn-circle btn-lg">
+						<i class="glyphicon glyphicon-file"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- BARRA DE CARREGAMENTO -->
+	<div class="modal fade" id="myModalProxima" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Carregando</h3>
+				</div>
+				<div class="modal-body">
+					<img src="../resources/imagens/Progress_bar.gif"
+						class="img-responsive" alt="Imagem responsiva" />
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- BARRA DE CARREGAMENTO -->
+	<div class="container">
+		<p:messages />
+		<h:outputText styleclass="alert alert-danger" role="alert"
+			value="#{calendarioMb.statusMessage}" />
+		<h:form>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Envio de Agenda Por Email</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<legend>Nome</legend>
+								<h:inputText styleClass="form-control"
+									value="#{calendarioMb.nomeEmail}" id="InputNome" />
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<legend>Para</legend>
+								<h:inputText styleClass="form-control"
+									value="#{calendarioMb.para}" id="InputPara" />
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<legend>Copia</legend>
+								<h:inputText styleClass="form-control"
+									value="#{calendarioMb.copia}" id="InputCopia" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<div class="form-group">
+									<legend>Inicio</legend>
+									<div class='input-group date datetimepicker'>
+										<h:inputText styleClass="form-control"
+											value="#{calendarioMb.inicio}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:inputText>
+										<span class="input-group-addon"><span
+											class="glyphicon glyphicon-calendar"></span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-8 col-lg-8">
+							<div class="form-group">
+								<legend>Assunto</legend>
+								<h:inputText styleClass="form-control"
+									value="#{calendarioMb.assunto}" id="InputAssunto" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<div class="form-group">
+									<legend>Fim</legend>
+									<div class='input-group date datetimepicker'>
+										<h:inputText styleClass="form-control"
+											value="#{calendarioMb.fim}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:inputText>
+										<span class="input-group-addon"><span
+											class="glyphicon glyphicon-calendar"></span></span>
+									</div>
+								</div>
+							</div>
+							<h:commandLink styleClass="btn btn-primary btn-circle btn-lg"
+								action="#{calendarioMb.buscar}">
+								<span class="glyphicon2 glyphicon-search"></span>
+							</h:commandLink>
+							<h:commandLink styleClass="btn btn-success btn-circle btn-lg"
+								action="#{calendarioMb.enviar()}">
+								<span class="glyphicon2 glyphicon-envelope"></span>
+							</h:commandLink>
+							<h:commandLink styleClass="btn btn-danger btn-circle btn-lg"
+								action="#{calendarioMb.atualizar}">
+								<span class="glyphicon2 glyphicon-refresh"></span>
+							</h:commandLink>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-8 col-lg-8">
+							<div class="form-group">
+								<legend>Mensagem</legend>
+								<h:inputTextarea rows="5" styleClass="form-control"
+									value="#{calendarioMb.mensagem}" id="InputMensagem" />
+							</div>
+						</div>
+					</div>
+					<div class="agenda">
+						<div class="table-responsive">
+							<h:dataTable id="filtro" value="#{calendarioMb.listarPorDatas}"
+								var="calendario"
+								styleClass="table table-condensed table-bordered table table-hover">
+								<h:column>
+									<div class="agenda-date active" rowspan="0">
+										<div class="dayofmonth">
+											<f:facet styleClass="texto1" name="header" class="texto1">Data</f:facet>
+											<h:outputText value="#{calendario.inicio}">
+												<f:convertDateTime pattern="dd" />
+											</h:outputText>
+										</div>
+										<div class="dayofweek">
+											<h:outputText value="#{calendario.inicio}">
+												<f:convertDateTime pattern="EEEEEEEE" />
+											</h:outputText>
+										</div>
+										<div class="shortdate text-muted">
+											<h:outputText value="#{calendario.inicio}">
+												<f:convertDateTime pattern="MMMMM,yyyy" />
+											</h:outputText>
+										</div>
+									</div>
+								</h:column>
+								<h:column>
+									<f:facet name="header">Horario</f:facet>
+									<h:outputText value="#{calendario.inicio}">
+										<f:convertDateTime pattern="h:mm a" />
+									</h:outputText>
+								- <h:outputText value="#{calendario.fim}">
+										<f:convertDateTime pattern="h:mm a" />
+									</h:outputText>
+								</h:column>
+								<h:column>
+									<f:facet name="header">Turma</f:facet>
+									<h:outputText value="#{calendario.turma.nomeTurma}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Ambiente</f:facet>
+									<h:outputText value="#{calendario.ambiente.nome}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Professor</f:facet>
+									<h:outputText value="#{calendario.professor.nome}" />
+								</h:column>
+							</h:dataTable>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<div class="texto1">
+			<h1>Enviar Agenda</h1>
+		</div>
+		<div class="btn-group btn-group-justified" role="group"
+			aria-label="...">
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-primary btn-outline "
+					data-toggle="modal" data-target="#myModalProxima"
+					onClick="voltarMenuAdm()"><span
+					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					Voltar Menu</a>
+			</div>
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-primary btn-outline "
+					data-toggle="modal" data-target="#myModalListarEventos"><span
+					class="glyphicon glyphicon-list" aria-hidden="true"></span> Lista
+					Agenda Geral</a>
+			</div>
+			<div class="btn-group" role="group">
+				<a type="button" class="btn btn-danger btn-outline "
+					data-toggle="modal" data-target="#myModalProxima" onClick="sair()"><span
+					class="glyphicon glyphicon-user" aria-hidden="true"></span> Sair</a>
+			</div>
+		</div>
+	</div>
+	<footer class="footer"> </footer>
+	<!--Bootstrap-->
+	<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="../resources/css/css/envioagenda.css" rel="stylesheet" />
+	<link href="../resources/css/bootstrap-datetimepicker.css"
+		rel="stylesheet" />
+	<script src="../resources/js/mudarPagina.js"></script>
+	<script src="../resources/js/imprimir.js"></script>
+	<script src="../resources/js/bootstrap.min.js"></script>
+	<script src="../resources/js/datepicker-component2.js"></script>
+	<script src="../resources/js/moment-with-locales.js"></script>
+	<script src="../resources/js/bootstrap-datetimepicker.js"></script>
+	<script src="../resources/js/modal.js"></script>
+</h:body>
+</html>
