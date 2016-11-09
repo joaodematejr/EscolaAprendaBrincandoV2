@@ -1,6 +1,5 @@
 package entity;
 
 public enum Semestre {
-	UM,DOIS,TRÊS,QUATRO
-
+	UM,DOIS,TRES,QUATRO
 }
