@@ -56,13 +56,13 @@ public class MailUtil {
 					+ c.getFim().toLocaleString() + "<br/>" + "<br/>"
 					+ " ____________________________________________________________" + "<br/>" + "<br/>";
 		}
-		mimeMessage.setContent("<h4> Olá,  " + "\n" + assunto + " </h4>" + "<h4> Segue sua Agenda entre o periodo de "
-				+ fim + " até " + inicio + " </h4>" + "<h4> Mensagem : " + mensagem + "</h4>" + "<h4>Sua Agenda,</h4>"
+		mimeMessage.setContent("<h4> Olï¿½,  " + "\n" + assunto + " </h4>" + "<h4> Segue sua Agenda entre o periodo de "
+				+ fim + " atï¿½ " + inicio + " </h4>" + "<h4> Mensagem : " + mensagem + "</h4>" + "<h4>Sua Agenda,</h4>"
 				+ "<table style=\"border:1px solid black;\">" + "<tr><td><h4>" + listarPorDatasNome + "</h4></td></tr>"
 				+ "</table>" +
 				/* SimpleDateFormat */
 				"<br/>" + "<h4></h4>"
-				+ "<h4>Este e-mail foi enviado usando JavaMail, foi gerado automaticamente pelo sistema. Por favor não responder.</h4>"
+				+ "<h4>Este e-mail foi enviado usando JavaMail, foi gerado automaticamente pelo sistema. Por favor nÃ£o responder.</h4>"
 				+ "<h4>Atenciosamente,</h4>" + "\n" + "<h4>Escola Aprenda Brincando</h4>"
 				+ "<img src=\"http://i67.tinypic.com/bhay6h.png\">", "text/html");
 
@@ -87,11 +87,11 @@ public class MailUtil {
 		mimeMessage.setFrom(new InternetAddress(FROM));
 		mimeMessage.setSender(new InternetAddress(FROM));
 		mimeMessage.setSubject("Cadastro");
-		mimeMessage.setContent("<h4> Olá,  " + "\n" + nome + ", </h4>"
-				+ "<h4> Esse email é uma confirmação que seu cadastro foi realizado com sucesso. </h4>"
-				+ "<h4> Segue Abaixo a confirmação do seus dados; </h4>" + "</h4>" + "<h4> Seu e-mail de Acesso : "
+		mimeMessage.setContent("<h4> OlÃ¡,  " + "\n" + nome + ", </h4>"
+				+ "<h4> Esse email Ã© uma confirmaÃ§Ã£o que seu cadastro foi realizado com sucesso. </h4>"
+				+ "<h4> Segue Abaixo a confirmaÃ§Ã£o do seus dados; </h4>" + "</h4>" + "<h4> Seu e-mail de Acesso : "
 				+ email + "</h4>" + "<h4> Sua Senha : " + senha + "</h4>"
-				+ "<h4>Este e-mail foi enviado usando JavaMail, foi gerado automaticamente pelo sistema. Por favor não responder.</h3>"
+				+ "<h4>Este e-mail foi enviado usando JavaMail, foi gerado automaticamente pelo sistema. Por favor nÃ£o responder.</h3>"
 				+ "<h4>Atenciosamente,</h4>" + "\n" + "<h4>Escola Aprenda Brincando</h4>"
 				+ "<img src=\"http://i67.tinypic.com/bhay6h.png\">", "text/html");
 		mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(email));

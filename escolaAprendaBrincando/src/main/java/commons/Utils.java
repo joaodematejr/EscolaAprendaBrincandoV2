@@ -11,9 +11,9 @@ public class Utils {
 			BigInteger hash = new BigInteger(1, algoritmo.digest(senha.getBytes("UTF-8")));
 			System.out.println(hash);
 			// %[flags][width]conversion
-			// [flags] = 0 -> Indica que n„o ter· zeros a esquerda (polarizaÁ„o)
-			// [width] = 1 -> tamanho m·ximo da convers„o de cada hash.
-			// conversion = X -> Convers„o para hexadecimal
+			// [flags] = 0 -> Indica que n√£o ter√° zeros a esquerda (polariza√ß√£o)
+			// [width] = 1 -> tamanho m√°ximo da convers√£o de cada hash.
+			// conversion = X -> Convers√£o para hexadecimal
 			return String.format("%01x", hash);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -9,6 +9,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import commons.JpaUtilTest;
 import entity.Cliente;
@@ -48,7 +49,7 @@ public class ClienteDAOTest {
 		Assert.assertNull(entityManager);
 	}
 
-	@Test
+	@Test@Ignore
 	public void salvaUsuarioTest() {
 		ClienteDAO dao = new ClienteDAO(entityManager);
 		Cliente clienteSave = new Cliente();

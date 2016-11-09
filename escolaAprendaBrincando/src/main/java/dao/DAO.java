@@ -3,7 +3,6 @@ package dao;
 import javax.persistence.EntityManager;
 
 import commons.JpaUtil;
-import commons.JpaUtilTest;
 
 public abstract class DAO {
 

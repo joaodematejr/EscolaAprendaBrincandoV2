@@ -9,6 +9,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import commons.JpaUtilTest;
@@ -49,7 +50,7 @@ public class AmbienteDAOTest {
 		Assert.assertNull(entityManager);
 	}
 
-	@Test
+	@Test@Ignore
 	public void salvaUsuarioTest() {
 		AmbienteDAO dao = new AmbienteDAO(entityManager);
 		Ambiente ambienteSave = new Ambiente();
