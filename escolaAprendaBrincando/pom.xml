@@ -7,7 +7,7 @@
 	<version>01.00.00-00</version>
 	<name>escolaAprendaBrincando Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<developers>
 		<developer>
 			<id>joao</id>
@@ -15,7 +15,7 @@
 			<email>joao@joao.com.br</email>
 		</developer>
 	</developers>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sonar.language>java</sonar.language>
@@ -25,7 +25,7 @@
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
 	</properties>
-	
+
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
@@ -120,6 +120,11 @@
 			<version>1.5.0-b01</version>
 		</dependency>
 		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.7</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
 			<version>1.4</version>
@@ -191,7 +196,8 @@
 							<propertyName>failsafeArgLine</propertyName>
 						</configuration>
 					</execution>
-					<!-- Assegura que os artefatos de cobertura de código serão gerados após a execução dos testes integração -->
+					<!-- Assegura que os artefatos de cobertura de código serão gerados 
+						após a execução dos testes integração -->
 					<execution>
 						<id>post-integration-test</id>
 						<phase>post-integration-test</phase>
@@ -239,7 +245,8 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.19.1</version>
 				<configuration>
-					<argLine>-Xms256m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=256m -Dfile.encoding=${project.build.sourceEncoding} ${surefireArgLine}</argLine>
+					<argLine>-Xms256m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=256m
+						-Dfile.encoding=${project.build.sourceEncoding} ${surefireArgLine}</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -254,12 +261,15 @@
 							<goal>verify</goal>
 						</goals>
 						<configuration>
-							<argLine>-Xms256m -Xmx768m -XX:PermSize=128m -XX:MaxPermSize=256m -Dfile.encoding=${project.build.sourceEncoding} ${failsafeArgLine}</argLine>
+							<argLine>-Xms256m -Xmx768m -XX:PermSize=128m -XX:MaxPermSize=256m
+								-Dfile.encoding=${project.build.sourceEncoding}
+								${failsafeArgLine}</argLine>
 						</configuration>
 					</execution>
 				</executions>
 				<configuration>
-					<argLine>-Xms256m -Xmx768m -XX:PermSize=128m -XX:MaxPermSize=256m -Dfile.encoding=${project.build.sourceEncoding} ${failsafeArgLine}</argLine>
+					<argLine>-Xms256m -Xmx768m -XX:PermSize=128m -XX:MaxPermSize=256m
+						-Dfile.encoding=${project.build.sourceEncoding} ${failsafeArgLine}</argLine>
 				</configuration>
 			</plugin>
 		</plugins>

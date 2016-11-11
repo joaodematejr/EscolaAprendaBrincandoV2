@@ -10,7 +10,7 @@ import entity.Cliente;//ACESSAR A CLASSE CLIENTE
 public class ClienteDAO extends DAO {
 
 	public ClienteDAO() {
-		
+
 	}
 
 	public ClienteDAO(EntityManager entityManager) {
@@ -61,9 +61,20 @@ public class ClienteDAO extends DAO {
 	public Cliente buscarPorEmail(String email) {
 		Query query = getEM().createQuery("From Cliente u Where u.email = :email", Cliente.class);
 		query.setParameter("email", email);
-
 		return (Cliente) query.getSingleResult();
 
+	}
+
+	public Cliente loginParaJson(String email, String senha) {
+		Query query = getEM().createQuery("SELECT u From Cliente u WHERE u.email  = :email AND u.senha = :senha");
+		query.setParameter("email", email);
+		query.setParameter("senha", senha);
+		try {
+			return (Cliente) query.getSingleResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
 	}
 
 }

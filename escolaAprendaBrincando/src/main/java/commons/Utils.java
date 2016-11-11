@@ -1,6 +1,7 @@
 package commons;
 
 import java.math.BigInteger;
+import com.google.gson.Gson;
 import java.security.MessageDigest;
 
 public class Utils {
@@ -19,6 +20,17 @@ public class Utils {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public static final String KEY = "eaf6c5fe009a07fb3ec3d7f33adcb932";
+	private static Gson gson;
+	public static Gson getGson() {
+		if (gson == null) {
+			gson = new Gson();
+
+		}
+		return gson;
+
 	}
 
 }

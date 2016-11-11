@@ -1,9 +1,11 @@
 package rn;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.ClienteDAO;
 import entity.Cliente;
+import json.ClienteJson;
 
 public class ClienteRN {
 	private ClienteDAO dao;
@@ -42,6 +44,22 @@ public class ClienteRN {
 
 	public List<Cliente> listarClientesQuantidade() {
 		return dao.listarClientesQuantidade();
+	}
+
+	public List<ClienteJson> listarClienteParaJson() {
+		List<ClienteJson> clientesJson = new ArrayList<ClienteJson>();
+		List<Cliente> clientesCarregados = dao.listarClientes();
+		for (Cliente u : clientesCarregados) {
+			ClienteJson cj = new ClienteJson();
+			cj.setNome(u.getNome());
+			cj.setEmail(u.getEmail());
+			clientesJson.add(cj);
+		}
+		return clientesJson;
+	}
+
+	public Cliente loginParaJson(String email, String senha) {
+		return dao.loginParaJson(email, senha);
 	}
 
 }

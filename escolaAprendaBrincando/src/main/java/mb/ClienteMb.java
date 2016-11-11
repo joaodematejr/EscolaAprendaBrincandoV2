@@ -1,17 +1,20 @@
 package mb;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 
 import commons.MailUtil;
 import commons.Utils;
 import entity.Cliente;
+import json.LoginJson;
 import rn.ClienteRN;
 
 @ViewScoped
@@ -23,6 +26,7 @@ public class ClienteMb {
 	private List<Cliente> listaClientes;
 	private List<Cliente> listaProfessores;
 	private List<Cliente> listaAlunos;
+	private List<Cliente> renderListClientesJson;
 
 	@PostConstruct
 	public void depoisDeConstruir() {
@@ -140,6 +144,50 @@ public class ClienteMb {
 		if (editarId != null && !FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
 			cliente = clienteRN.buscarPorId(editarId);
 		}
+
+	}
+
+	public void renderListClientesJson() throws IOException {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		
+		String key = externalContext.getRequestParameterMap().get("key");
+		String json = "";
+		
+		if (key != null && key.equals(Utils.KEY)) {
+			json = Utils.getGson().toJson(clienteRN.listarClienteParaJson());
+
+		}
+		externalContext.setResponse("application/json");
+		externalContext.setResponseCharacterEncoding("UTF-8");
+		externalContext.getResponseOutputWriter().write(json);
+		context.responseComplete();
+	}
+
+	public void renderLoginJson() throws IOException {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		String email = externalContext.getRequestParameterMap().get("email");
+		String senha = externalContext.getRequestParameterMap().get("senha");
+		String key = externalContext.getRequestParameterMap().get("key");
+		String json = "";
+		if (key != null && key.equals(Utils.KEY)) {
+			Cliente u = clienteRN.loginParaJson(email, senha);
+			if (u != null) {
+				LoginJson lj = new LoginJson();
+				lj.setNome(u.getNome());
+				lj.setPerfil("ROLE_PROFESSOR");
+				json = Utils.getGson().toJson(lj);
+
+			}
+
+		}
+		externalContext.setResponseContentType("application/json");
+		externalContext.setResponseCharacterEncoding("UTF-8");
+		externalContext.getResponseOutputWriter().write(json);
+		context.responseComplete();
 
 	}
 
