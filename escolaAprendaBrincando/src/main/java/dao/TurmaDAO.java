@@ -3,7 +3,9 @@ package dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import entity.Turma;
 
 public class TurmaDAO extends DAO {
@@ -26,5 +28,13 @@ public class TurmaDAO extends DAO {
 		Query query = getEM().createQuery("From Turma", Turma.class);//
 		return query.getResultList();
 
+	}
+
+	public TurmaDAO() {
+
+	}
+
+	public TurmaDAO(EntityManager entityManager) {
+		super(entityManager);
 	}
 }

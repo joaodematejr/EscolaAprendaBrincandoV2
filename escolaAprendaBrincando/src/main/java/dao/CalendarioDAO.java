@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -49,6 +50,14 @@ public class CalendarioDAO extends DAO {
 		query.setParameter("inicio", inicio);
 		query.setParameter("fim", fim);
 		return query.getResultList();
+	}
+
+	public CalendarioDAO() {
+
+	}
+
+	public CalendarioDAO(EntityManager entityManager) {
+		super(entityManager);
 	}
 
 }

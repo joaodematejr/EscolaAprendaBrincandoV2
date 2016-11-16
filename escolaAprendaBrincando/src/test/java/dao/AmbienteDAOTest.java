@@ -1,7 +1,5 @@
 package dao;
 
-import java.util.Date;
-
 import javax.persistence.EntityManager;
 
 import org.junit.After;
@@ -9,14 +7,12 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import commons.JpaUtilTest;
 import entity.Ambiente;
 
 public class AmbienteDAOTest {
-
 	private EntityManager entityManager;
 
 	@BeforeClass
@@ -26,12 +22,13 @@ public class AmbienteDAOTest {
 
 	@AfterClass
 	public static void finishClass() {
-		JpaUtilTest.getInstancia().closeEntityManagerFactory();
+		JpaUtilTest.getInstancia().closeEntityManager();
 	}
 
 	@Before
 	public void initTest() {
 		entityManager = JpaUtilTest.getInstancia().getEntityManager();
+
 	}
 
 	@After
@@ -40,28 +37,48 @@ public class AmbienteDAOTest {
 	}
 
 	@Test
-	public void entityManagerByUsuarioDaoIsNotNullTest() {
-		Assert.assertNotNull(entityManager);
+	public void testeVazioTest() {
+		AmbienteDAO dao = new AmbienteDAO();
 	}
 
 	@Test
-	public void entityManagerByUsuarioDaoIsNullTest() {
-		entityManager = null;
-		Assert.assertNull(entityManager);
+	public void listarAmbientesTest() {
+		AmbienteDAO dao = new AmbienteDAO(entityManager);
+		dao.listarAmbientes();
 	}
 
-	@Test@Ignore
-	public void salvaUsuarioTest() {
+	@Test
+	public void buscarPorIdTest() {
 		AmbienteDAO dao = new AmbienteDAO(entityManager);
-		Ambiente ambienteSave = new Ambiente();
+		dao.buscarPorId(1l);
+	}
 
+	@Test
+	public void salvarAmbienteTest() {
+		AmbienteDAO dao = new AmbienteDAO(entityManager);
+		Ambiente ambienteSalvar = new Ambiente(1l, "descrição", "nome", "quantidade");
 		JpaUtilTest.getInstancia().beginSession();
-		dao.salvar(ambienteSave);
+		dao.salvar(ambienteSalvar);
+		Ambiente retornarAmbiente = dao.buscarPorId(1l);
 		JpaUtilTest.getInstancia().endSession();
 
-		Ambiente ambienteRecuperado = dao.buscarPorId(1l);
+	}
 
-		Assert.assertTrue(ambienteSave.equals(ambienteRecuperado));
+	@Test
+	public void deletarAmbienteTest() {
+		AmbienteDAO dao = new AmbienteDAO(entityManager);
+		Ambiente ambienteSalvar = new Ambiente(2l, "descrição", "nome", "quantidade");
+		JpaUtilTest.getInstancia().beginSession();
+		dao.salvar(ambienteSalvar);
+		dao.excluir(2l);
+		JpaUtilTest.getInstancia().endSession();
+
+	}
+
+	@Test
+	public void entityManagerAmbienteNullTeste() {
+		entityManager = null;
+		Assert.assertNull(entityManager);
 	}
 
 }

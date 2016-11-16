@@ -24,6 +24,7 @@ public class Utils {
 
 	public static final String KEY = "eaf6c5fe009a07fb3ec3d7f33adcb932";
 	private static Gson gson;
+
 	public static Gson getGson() {
 		if (gson == null) {
 			gson = new Gson();

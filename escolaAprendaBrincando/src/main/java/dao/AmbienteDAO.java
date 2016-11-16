@@ -9,14 +9,6 @@ import entity.Ambiente;
 
 public class AmbienteDAO extends DAO {
 
-	public AmbienteDAO() {
-
-	}
-
-	public AmbienteDAO(EntityManager entityManager) {
-		super(entityManager);
-	}
-
 	public void salvar(Ambiente ambiente) {
 		getEM().merge(ambiente);
 
@@ -38,6 +30,14 @@ public class AmbienteDAO extends DAO {
 		Ambiente ambiente = getEM().getReference(Ambiente.class, id);
 		getEM().remove(ambiente);
 
+	}
+
+	public AmbienteDAO() {
+
+	}
+
+	public AmbienteDAO(EntityManager entityManager) {
+		super(entityManager);
 	}
 
 }

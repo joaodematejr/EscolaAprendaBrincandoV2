@@ -9,8 +9,8 @@ import javax.faces.bean.ViewScoped;
 import javax.servlet.http.Part;
 
 import commons.UploadUtil;
-import entity.Turma;
 import entity.Documento;
+import entity.Turma;
 import rn.AlbumRN;
 import rn.TurmaRN;
 

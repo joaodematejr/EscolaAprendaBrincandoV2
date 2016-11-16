@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.google.gson.JsonElement;
-
 import dao.CalendarioDAO;
 import entity.Calendario;
 import json.CalendarioJson;

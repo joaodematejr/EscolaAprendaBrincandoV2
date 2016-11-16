@@ -12,18 +12,15 @@ import rn.TurmaRN;
 public class TurmaConversos implements Converter {
 
 	@Override
-	public Object getAsObject(FacesContext facesContext,
-			UIComponent uiComponent, String valor) {
+	public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String valor) {
 		TurmaRN rn = new TurmaRN();
 		Long id = Long.parseLong(valor);
 		return rn.buscarPorId(id);
 	}
 
 	@Override
-	public String getAsString(FacesContext facesContext,
-			UIComponent uiComponent, Object valor) {
+	public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object valor) {
 		Turma turma = (Turma) valor;
 		return turma.getId().toString();
 	}
 }
-

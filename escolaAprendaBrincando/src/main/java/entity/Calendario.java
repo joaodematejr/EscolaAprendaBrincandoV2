@@ -146,4 +146,19 @@ public class Calendario {
 		this.professor = professor;
 	}
 
+	public Calendario() {
+	}
+
+	public Calendario(long id, String titulo, Date inicio, Date fim, String descricao, Turma turma, Ambiente ambiente,
+			Cliente professor) {
+		this.id = id;
+		this.titulo = titulo;
+		this.inicio = inicio;
+		this.fim = fim;
+		this.descricao = descricao;
+		this.turma = turma;
+		this.ambiente = ambiente;
+		this.professor = professor;
+	}
+
 }
