@@ -15,6 +15,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
@@ -30,42 +31,48 @@ import rn.CalendarioRN;
 
 /* http://developers.itextpdf.com/examples-itext5 */
 public class GerarPDF {
-	public void gerarPdf() {
+	private BaseColor color;
+	public static final String IMAGE = "file:///C:/Users/joaod/git/EscolaAprendaBrincandoV2/escolaAprendaBrincando/src/main/webapp/resources/imagens/logo.png";
 
+	public void gerarPdf() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+
 		try {
+
 			Document document = new Document();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			PdfWriter.getInstance(document, baos);
 			document.open();
-			String s = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-			s = s + "/resources/imagens/logo.png";
-			document.addTitle("Agenda em PDF");
 			document.add(new Paragraph(""));
-			document.add(Chunk.NEWLINE);
-			document.add(Chunk.NEWLINE);
-
+			document.addTitle("Agenda em PDF");
 			CalendarioRN calendarioRN = new CalendarioRN();
 			List<Calendario> calendarios = calendarioRN.listaCalendarios();
-
-			PdfPTable table = new PdfPTable(7);
-			PdfPCell cell = new PdfPCell(new Phrase("Agenda Geral"));
-			cell.setColspan(8);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			
-			table.addCell(cell);
-			table.addCell(createBody("Turma", null));
-
+			PdfPTable table = new PdfPTable(2);
+			table.setSpacingBefore(15);
+			color = BaseColor.BLUE;
 			for (Calendario u : calendarios) {
-				table.addCell(createBody(u.getInicio().toString(), null));
-				table.addCell(createBody(u.getFim().toString(), null));
-				table.addCell(createBody(u.getTitulo(), null));
-				table.addCell(createBody(u.getDescricao(), null));
-				table.addCell(createBody(u.getTurma().getNomeTurma(), null));
-
-				document.add(table);
+				PdfPCell cell = new PdfPCell(new Phrase("Turma : " + u.getTurma().getNomeTurma()));
+				cell.setRotation(0);
+				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table.addCell(cell);
+				PdfPTable inner = new PdfPTable(1);
+				inner.addCell("Titulo : " + u.getTitulo());
+				inner.addCell("Professor : " + u.getProfessor().getNome());
+				inner.addCell("Ambiente : " + u.getAmbiente().getNome());
+				inner.addCell("Sala : " + u.getTurma().getNomeTurma());
+				inner.addCell("Periodo : " + u.getTurma().getTurno());
+				inner.addCell("Alunos : " + u.getTurma().getqAluno());
+				inner.addCell("Descrição : " + u.getDescricao());
+				inner.addCell("Inicio : " + u.getInicio().toLocaleString());
+				inner.addCell("Encerramento : " + u.getFim().toLocaleString());
+				cell = new PdfPCell(inner);
+				cell.setPadding(2);
+				table.addCell(cell);
 			}
+
+			document.add(table);
 			document.close();
 			response.setHeader("Expires", "0");
 			response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");

@@ -39,11 +39,11 @@
 			</div>
 			<div class="navbar-text navbar-right">
 				<a class="navbar-brand " href="#"><h:outputText
-						value="#{sessaoMB.cpfClienteLogado}" /> </a>
+						value="#{loginManager.cliente.email}" /> </a>
 			</div>
 			<div class="navbar-text navbar-right">
 				<a class="navbar-brand " href="#"><h:outputText
-						value="#{sessaoMB.nomeClienteLogado}" /> </a>
+						value="#{loginManager.cliente.nome}" /> </a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
@@ -68,7 +68,8 @@
 							<h:selectOneMenu styleClass="form-control"
 								value="#{clienteMb.cliente.perfil}">
 								<f:selectItem itemLabel="-" itemValue="" />
-								<f:selectItem itemLabel="Administrador" itemValue="Administrador" />
+								<f:selectItem itemLabel="Administrador"
+									itemValue="Administrador" />
 								<f:selectItem itemLabel="Aluno" itemValue="Aluno" />
 								<f:selectItem itemLabel="Professor" itemValue="Professor" />
 							</h:selectOneMenu>

@@ -22,11 +22,11 @@
 		</div>
 		<div class="navbar-text navbar-right">
 			<a class="navbar-brand " href="#"><h:outputText
-					value="#{sessaoMB.cpfClienteLogado}" /> </a>
+					value="#{loginManager.cliente.email}" /> </a>
 		</div>
 		<div class="navbar-text navbar-right">
 			<a class="navbar-brand " href="#"><h:outputText
-					value="#{sessaoMB.nomeClienteLogado}" /> </a>
+					value="#{loginManager.cliente.nome}" /> </a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
@@ -163,14 +163,15 @@
 			<a type="button" class="btn btn-primary btn-outline "
 				data-toggle="modal" data-target="#myModalProxima"
 				onClick="voltarMenuAdm()"> <span
-				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Voltar
-				Menu
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				Voltar Menu
 			</a>
 		</div>
 		<div class="btn-group" role="group">
 			<a type="button" class="btn btn-primary btn-outline "
 				data-toggle="modal" data-target="#myModalProximaa"><span
-				class="glyphicon glyphicon-list" aria-hidden="true"></span> Listar Agenda</a>
+				class="glyphicon glyphicon-list" aria-hidden="true"></span> Listar
+				Agenda</a>
 		</div>
 		<div class="btn-group" role="group">
 			<a type="button" class="btn btn-danger btn-outline "

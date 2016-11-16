@@ -120,11 +120,11 @@ public class ClienteMb {
 
 	public String salvar() throws Throwable {
 		try {
+			MailUtil.sendConfirmacao(cliente.getNome(), cliente.getEmail(), cliente.getCpf(), cliente.getTelefone(),
+					cliente.getSenha());
 			String hash = Utils.senhaToSha256(cliente.getSenha());
 			cliente.setSenha(hash);
 			clienteRN.salvar(cliente);
-			MailUtil.sendConfirmacao(cliente.getNome(), cliente.getEmail(), cliente.getCpf(), cliente.getTelefone(),
-					cliente.getSenha());
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso", "Salvo com sucesso."));
 			return "menuadministrativo";
@@ -148,13 +148,13 @@ public class ClienteMb {
 	}
 
 	public void renderListClientesJson() throws IOException {
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = context.getExternalContext();
-		
+
 		String key = externalContext.getRequestParameterMap().get("key");
 		String json = "";
-		
+
 		if (key != null && key.equals(Utils.KEY)) {
 			json = Utils.getGson().toJson(clienteRN.listarClienteParaJson());
 
@@ -166,7 +166,7 @@ public class ClienteMb {
 	}
 
 	public void renderLoginJson() throws IOException {
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = context.getExternalContext();
 		String email = externalContext.getRequestParameterMap().get("email");

@@ -9,6 +9,8 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="../resources/font-awesome/css/font-awesome.min.css" />
 	<link rel="icon" href="../resources/imagens/icons.png"
 		type="image/x-icon" />
 	<title>Professor</title>
@@ -248,123 +250,60 @@
 		</div>
 		<!-- LISTAR DE TURMA INICIO -->
 		<div class="modal fade" id="myModalListarTurmas" role="dialog">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-lx">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Lista - Turmas</h4>
 					</div>
-					<div class="modal-bodyTurma">
+					<div class="modal-body">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">Minhas Turmas</h3>
 							</div>
-							<div class="col-md-9"></div>
 							<div class="panel-body">
-								<h:dataTable
-									styleClass="table table table-hover table table-bordered"
-									value="#{turmaMb.listarTurmas}" var="turma">
+								<h:dataTable styleClass="table" value="#{turmaMb.listarTurmas}"
+									var="turma">
 									<h:column>
-										<f:facet name="header">Codigo da Turma</f:facet>
-										<h:outputText value="#{turma.id}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">Professores</f:facet>
-										<h:outputText value="#{turma.professor.nome}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">Documentos</f:facet>
-										<h:link styleClass="btn btn-primary btn-xs btn-block"
-											outcome="adminarquivos">
-											<span class="glyphicon glyphicon-book"></span>
-											<f:param name="idturma" value="#{turma.id}" />
-										</h:link>
-
-									</h:column>
-									<h:column>
-										<f:facet name="header">Prova</f:facet>
-										<h:link styleClass="btn btn-default btn-xs btn-block"
-											outcome="adicionarprovas">
-											<span class="glyphicon glyphicon-file"></span>
-											<f:param name="idturma" value="#{turma.id}" />
-										</h:link>
-									</h:column>
-									<h:column>
-										<f:facet name="header">Visualizar</f:facet>
-										<button type="button" class="btn btn-success btn-xs btn-block"
-											data-toggle="modal" data-target="#myModalTurma#{turma.id}"
-											aria-label="Alinhar na esquerda">
-											<span class="glyphicon glyphicon-fullscreen"
-												aria-hidden="true"></span>
-										</button>
-										<div class="modal fade bd-example-modal-lg"
-											id="myModalTurma#{turma.id}" tabindex="-1" role="dialog"
-											aria-labelledby="myModalLabel">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header"></div>
-													<div class="modal-body">
-														<div class="panel panel-info">
-															<div class="panel-heading">
-																<h3 class="panel-title">
-																	<h:outputText value="#{turma.nomeTurma}" />
-																</h3>
+										<div class="col-lg-12 col-md-6">
+											<div class="panel panel-info class">
+												<div class="panel-heading">
+													<div class="row">
+														<div class="col-xs-3">
+															<i class="fa fa-address-book fa-4x" aria-hidden="true"></i>
+														</div>
+														<div class="col-xs-9 text-right">
+															<div class="huge">
+																<h:outputText value="#{turma.nomeTurma}" />
 															</div>
-															<div class="panel-body">
-																<div class="row">
-																	<div class="col-md-3 col-lg-3 " align="center">
-																		<img alt="User Pic"
-																			src="../resources/imagens/turma.png"
-																			class="img-rounded img-responsive" />
-																	</div>
-																	<div class=" col-md-9 col-lg-9 ">
-																		<table class="table table-user-information">
-																			<tbody>
-																				<tr>
-																					<td>Codigo da Turma:</td>
-																					<td><h:outputText value="#{turma.id}" /></td>
-																				</tr>
-																				<tr>
-																					<td>Professor:</td>
-																					<td><h:outputText
-																							value="#{turma.professor.nome}" /></td>
-																				</tr>
-																				<tr>
-																					<td>Nome da Turma:</td>
-																					<td><h:outputText value="#{turma.nomeTurma}" /></td>
-																				</tr>
-																				<tr>
-																					<td>Quantidade de Alunos:</td>
-																					<td><h:outputText value="#{turma.qAluno}" /></td>
-																				</tr>
-																				<tr>
-																					<td>Periodo:</td>
-																					<td><h:outputText value="#{turma.turno}" /></td>
-																				</tr>
-																				<tr>
-																					<td>Data Inicial:</td>
-																					<td><h:outputText value="#{turma.dataInicio}">
-																							<f:convertDateTime pattern="dd/MM/yyyy" />
-																						</h:outputText></td>
-																				</tr>
-																				<tr>
-																					<td>Data Final:</td>
-																					<td><h:outputText value="#{turma.dataFinal}">
-																							<f:convertDateTime pattern="dd/MM/yyyy" />
-																						</h:outputText></td>
-																				</tr>
-																				<tr>
-																					<td>Quantidade de Semestre:</td>
-																					<td><h:outputText value="#{turma.semestre}" /></td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</div>
-																</div>
+															<div>
+																<h:outputText value="#{turma.turno}" />
+															</div>
+															<div>
+																<h:outputText value="#{turma.qAluno}" />
+															</div>
+															<div>
+																<h:outputText value="#{turma.professor.nome}" />
 															</div>
 														</div>
 													</div>
 												</div>
+												<a href="#">
+													<div class="panel-footer">
+														<h:link value="Documentos" outcome="adminarquivos">
+															<f:param name="idturma" value="#{turma.id}" />
+														</h:link>
+														<span class="pull-right"><i
+															class="fa fa-arrow-circle-right"></i></span>
+														<div class="clearfix"></div>
+														<h:link value="Provas" outcome="adicionarprovas">
+															<f:param name="idturma" value="#{turma.id}" />
+														</h:link>
+														<span class="pull-right"><i
+															class="fa fa-arrow-circle-right"></i></span>
+														<div class="clearfix"></div>
+													</div>
+												</a>
 											</div>
 										</div>
 									</h:column>
@@ -599,6 +538,7 @@
 		<footer class="footer"> </footer>
 		<!--Bootstrap-->
 		<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../resources/css/font-awesome.css" rel="stylesheet" />
 		<link href="../resources/css/css/menuprincipal.css" rel="stylesheet" />
 		<script src="../resources/js/jquery.js"></script>
 		<script src="../resources/js/mudarPagina.js"></script>

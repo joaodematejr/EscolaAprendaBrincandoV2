@@ -1,10 +1,14 @@
 package rn;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gson.JsonElement;
+
 import dao.CalendarioDAO;
 import entity.Calendario;
+import json.CalendarioJson;
 
 public class CalendarioRN {
 
@@ -40,6 +44,23 @@ public class CalendarioRN {
 
 	public List<Calendario> buscarPorDatas(Date inicio, Date fim) {
 		return dao.buscarPorDatas(inicio, fim);
+	}
+
+	public List<CalendarioJson> listaCalendariosParaJson() {
+		List<CalendarioJson> calendarioJson = new ArrayList<CalendarioJson>();
+		List<Calendario> calendarioCarregados = dao.listarCalendarios();
+		for (Calendario c : calendarioCarregados) {
+			CalendarioJson cj = new CalendarioJson();
+			cj.setTitulo(c.getTitulo());
+			cj.setInicio(c.getInicio());
+			cj.setFim(c.getFim());
+			cj.setNomeTurma(c.getTurma());
+			cj.setProfessor(c.getProfessor());
+			cj.setAmbiente(c.getAmbiente());
+			calendarioJson.add(cj);
+
+		}
+		return calendarioJson;
 	}
 
 }

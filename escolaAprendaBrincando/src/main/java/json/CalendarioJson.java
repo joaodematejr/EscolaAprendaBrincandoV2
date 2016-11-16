@@ -2,13 +2,19 @@ package json;
 
 import java.util.Date;
 
+import javax.persistence.ManyToOne;
+
+import entity.Ambiente;
+import entity.Cliente;
+import entity.Turma;
+
 public class CalendarioJson {
-	public String titulo;
-	public String ambiente;
-	public String turma;
-	public String professor;
-	public Date inicio;
-	public Date fim;
+	private String titulo;
+	private Date inicio;
+	private Date fim;
+	private Turma nomeTurma;
+	private Ambiente ambiente;
+	private Cliente professor;
 
 	public String getTitulo() {
 		return titulo;
@@ -16,30 +22,6 @@ public class CalendarioJson {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
-	}
-
-	public String getAmbiente() {
-		return ambiente;
-	}
-
-	public void setAmbiente(String ambiente) {
-		this.ambiente = ambiente;
-	}
-
-	public String getTurma() {
-		return turma;
-	}
-
-	public void setTurma(String turma) {
-		this.turma = turma;
-	}
-
-	public String getProfessor() {
-		return professor;
-	}
-
-	public void setProfessor(String professor) {
-		this.professor = professor;
 	}
 
 	public Date getInicio() {
@@ -56,6 +38,30 @@ public class CalendarioJson {
 
 	public void setFim(Date fim) {
 		this.fim = fim;
+	}
+
+	public Turma getNomeTurma() {
+		return nomeTurma;
+	}
+
+	public void setNomeTurma(Turma nomeTurma) {
+		this.nomeTurma = nomeTurma;
+	}
+
+	public Ambiente getAmbiente() {
+		return ambiente;
+	}
+
+	public void setAmbiente(Ambiente ambiente) {
+		this.ambiente = ambiente;
+	}
+
+	public Cliente getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Cliente professor) {
+		this.professor = professor;
 	}
 
 }

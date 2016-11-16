@@ -1,5 +1,6 @@
 package mb;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.mail.MessagingException;
@@ -23,6 +25,7 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import commons.MailUtil;
+import commons.Utils;
 import dao.CalendarioDAO;
 import entity.Ambiente;
 import entity.Calendario;
@@ -152,7 +155,8 @@ public class CalendarioMb {
 
 	public List<Calendario> getListarCalendarioProfessor() {
 		if (listarCalendarioProfessor == null) {
-			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+					.getRequest();
 			LoginManager loginManager = (LoginManager) request.getSession().getAttribute("loginManager");
 			listarCalendarioProfessor = calendarioRN.listarCalendarioPorProfessor(loginManager.getCliente().getId());
 
@@ -398,6 +402,22 @@ public class CalendarioMb {
 
 	public void setSelectedCalendario(Calendario selectedCalendario) {
 		this.selectedCalendario = selectedCalendario;
+	}
+
+	/* JSON */
+	public void rendeCalendarioJson() throws IOException {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		String key = externalContext.getRequestParameterMap().get("key");
+		String json = "";
+		if (key != null && key.equals(Utils.KEY)) {
+			json = Utils.getGson().toJson(calendarioRN.listaCalendariosParaJson());
+
+		}
+		externalContext.setResponseContentType("application/json");
+		externalContext.setResponseCharacterEncoding("UTF-8");
+		externalContext.getResponseOutputWriter().write(json);
+		context.responseComplete();
 	}
 
 }

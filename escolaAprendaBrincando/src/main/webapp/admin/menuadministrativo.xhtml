@@ -11,6 +11,8 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="../resources/font-awesome/css/font-awesome.min.css" />
 	<link rel="icon" href="../resources/imagens/icons.png"
 		type="image/x-icon" />
 	<title>Menu Administrativo</title>
@@ -800,10 +802,10 @@
 						aria-hidden="true"></span> Adicionar Turmas</a>
 				</div>
 				<div class="btn-group" role="group">
-					<h:commandLink styleClass="btn btn-primary btn-outline"
-						immediate="true" action="#{gerarPDF.gerarPdf()}" value="Gerar PDF">
-						<span class="glyphicon glyphicon-floppy-save" />
-					</h:commandLink>
+					<a type="button" class="btn btn-primary btn-outline "
+						data-toggle="modal" data-target="#myModalProxima"
+						onClick="agendaPDF()"><i class="fa fa-file-pdf-o fa-1x"
+						aria-hidden="true"></i> Gerar PDF</a>
 				</div>
 			</div>
 			<h1></h1>

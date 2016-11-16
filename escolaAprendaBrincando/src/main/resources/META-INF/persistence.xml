@@ -7,15 +7,6 @@
 
 		<!-- provedor/implementacao do JPA -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>entity.Ambiente</class>
-		<class>entity.Calendario</class>
-		<class>entity.Chamada</class>
-		<class>entity.Cliente</class>
-		<class>entity.Documento</class>
-		<class>entity.Pergunta</class>
-		<class>entity.Prova</class>
-		<class>entity.Questao</class>
-		<class>entity.Turma</class>
 
 		<properties>
 			<!-- dados da conexao -->
