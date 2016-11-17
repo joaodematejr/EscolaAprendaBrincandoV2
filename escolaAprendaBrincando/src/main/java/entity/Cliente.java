@@ -1,6 +1,5 @@
 package entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -161,25 +160,12 @@ public class Cliente {
 		this.turmas = turmas;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", perfil=" + perfil + ", nome=" + nome + ", cpf=" + cpf + ", cep=" + cep
 				+ ", estado=" + estado + ", endereco=" + endereco + ", numero=" + numero + ", complemento="
 				+ complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", telefone=" + telefone + ", email="
 				+ email + ", senha=" + senha + ", nascimento=" + nascimento + ", turmas=" + turmas + "]";
-	}
-
-	/**
-	 * 
-	 */
-	public Cliente() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -314,6 +300,30 @@ public class Cliente {
 			return false;
 		}
 		return true;
+	}
+
+	public Cliente() {
+	}
+
+	public Cliente(Long id, String perfil, String nome, String cpf, String cep, String estado, String endereco,
+			String numero, String complemento, String bairro, String cidade, String telefone, String email,
+			String senha, Date nascimento, List<Turma> turmas) {
+		this.id = id;
+		this.perfil = perfil;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.cep = cep;
+		this.estado = estado;
+		this.endereco = endereco;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.telefone = telefone;
+		this.email = email;
+		this.senha = senha;
+		this.nascimento = nascimento;
+		this.turmas = turmas;
 	}
 
 }

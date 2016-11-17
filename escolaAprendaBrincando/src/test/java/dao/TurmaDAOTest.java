@@ -9,6 +9,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import commons.JpaUtilTest;
@@ -74,22 +75,6 @@ public class TurmaDAOTest {
 		}
 		Turma retornarTurma = dao.buscarPorId(1l);
 		JpaUtilTest.getInstancia().endSession();
-	}
-
-	@Test
-	public void deletarTurmaTest() {
-		TurmaDAO dao = new TurmaDAO(entityManager);
-		Cliente cliente = new Cliente();
-		Turma turmaSalvar = new Turma(4l, "2016-10-20 20:11:00", "2016-10-20 20:11:00", "NomeTurma", "quantidadeAluno",
-				null, null, null, null, null);
-		JpaUtilTest.getInstancia().beginSession();
-		try {
-			dao.salvar(turmaSalvar);
-		} catch (SQLException e) {
-		}
-		dao.excluir(4l);
-		JpaUtilTest.getInstancia().endSession();
-
 	}
 
 }

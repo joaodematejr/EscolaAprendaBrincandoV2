@@ -7,6 +7,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import commons.JpaUtilTest;
@@ -65,12 +66,13 @@ public class AmbienteDAOTest {
 	}
 
 	@Test
+	@Ignore
 	public void deletarAmbienteTest() {
 		AmbienteDAO dao = new AmbienteDAO(entityManager);
-		Ambiente ambienteSalvar = new Ambiente(2l, "descrição", "nome", "quantidade");
+		Ambiente ambienteSalvar = new Ambiente(3l, null, null, null);
 		JpaUtilTest.getInstancia().beginSession();
 		dao.salvar(ambienteSalvar);
-		dao.excluir(2l);
+		dao.excluir(3l);
 		JpaUtilTest.getInstancia().endSession();
 
 	}

@@ -42,10 +42,6 @@ public class ClienteRN {
 		return dao.buscarPorEmail(email);
 	}
 
-	public List<Cliente> listarClientesQuantidade() {
-		return dao.listarClientesQuantidade();
-	}
-
 	public List<ClienteJson> listarClienteParaJson() {
 		List<ClienteJson> clientesJson = new ArrayList<ClienteJson>();
 		List<Cliente> clientesCarregados = dao.listarClientes();

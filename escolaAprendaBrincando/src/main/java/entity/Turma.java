@@ -217,7 +217,6 @@ public class Turma {
 
 	public Turma(Long id, String nomeTurma, String qAluno, String turno, String semestre, Date dataInicio,
 			Date dataFinal, Cliente professor, List<Cliente> clienteTurma, List<Cliente> aluno) {
-		super();
 		this.id = id;
 		this.nomeTurma = nomeTurma;
 		this.qAluno = qAluno;

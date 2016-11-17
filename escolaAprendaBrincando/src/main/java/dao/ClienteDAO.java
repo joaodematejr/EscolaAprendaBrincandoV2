@@ -9,14 +9,6 @@ import entity.Cliente;//ACESSAR A CLASSE CLIENTE
 
 public class ClienteDAO extends DAO {
 
-	public ClienteDAO() {
-
-	}
-
-	public ClienteDAO(EntityManager entityManager) {
-		super(entityManager);
-	}
-
 	public void salvar(Cliente cliente) {
 		getEM().merge(cliente);
 	}
@@ -52,12 +44,6 @@ public class ClienteDAO extends DAO {
 		return query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Cliente> listarClientesQuantidade() {
-		Query query = getEM().createQuery("SELECT COUNT(id) FROM cliente;", Cliente.class);//
-		return query.getResultList();
-	}
-
 	public Cliente buscarPorEmail(String email) {
 		Query query = getEM().createQuery("From Cliente u Where u.email = :email", Cliente.class);
 		query.setParameter("email", email);
@@ -72,9 +58,16 @@ public class ClienteDAO extends DAO {
 		try {
 			return (Cliente) query.getSingleResult();
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		return null;
+	}
+
+	public ClienteDAO() {
+
+	}
+
+	public ClienteDAO(EntityManager entityManager) {
+		super(entityManager);
 	}
 
 }

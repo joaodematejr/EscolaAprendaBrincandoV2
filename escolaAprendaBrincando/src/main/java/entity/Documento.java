@@ -75,4 +75,15 @@ public class Documento {
 		this.comentario = comentario;
 	}
 
+	public Documento() {
+	}
+
+	public Documento(Long id, String nome, Date data, String comentario, Turma turma) {
+		this.id = id;
+		this.nome = nome;
+		this.data = data;
+		this.comentario = comentario;
+		this.turma = turma;
+	}
+
 }

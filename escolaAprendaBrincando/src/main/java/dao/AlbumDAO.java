@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import entity.Documento;
@@ -25,6 +26,14 @@ public class AlbumDAO extends DAO {
 
 	public void excluir(Documento documento) {
 		getEM().remove(documento);
+	}
+
+	public AlbumDAO() {
+
+	}
+
+	public AlbumDAO(EntityManager entityManager) {
+		super(entityManager);
 	}
 
 }
