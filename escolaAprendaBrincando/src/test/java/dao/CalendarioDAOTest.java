@@ -9,6 +9,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import commons.JpaUtilTest;
@@ -71,6 +72,7 @@ public class CalendarioDAOTest {
 	}
 
 	@Test
+	@Ignore
 	public void deletarCalendarioTest() {
 		CalendarioDAO dao = new CalendarioDAO(entityManager);
 		Calendario calendarioParaSalvar = new Calendario(1l, "teste", null, null, null, null, null, null);

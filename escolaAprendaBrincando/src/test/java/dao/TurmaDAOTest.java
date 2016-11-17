@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 
@@ -65,15 +66,35 @@ public class TurmaDAOTest {
 	@Test
 	public void salvarTurmaTest() {
 		TurmaDAO dao = new TurmaDAO(entityManager);
-		Turma turmaSalvar = new Turma(1l, "2016-10-20 20:11:00", "2016-10-20 20:11:00", "NomeTurma", "quantidadeAluno",
-				null, null, null, null, null);
+		Cliente clienteProfessor = new Cliente();
+		Cliente clienteAluno = new Cliente();
+		Turma turmaSave = new Turma(2l, "NomeTurmaTeste", "Qalunos", "TurnoTeste", "SemetreTeste", new Date(),
+				new Date(), clienteProfessor, null, null);
 		JpaUtilTest.getInstancia().beginSession();
 		try {
-			dao.salvar(turmaSalvar);
+			dao.salvar(turmaSave);
 		} catch (SQLException e) {
-
 		}
 		Turma retornarTurma = dao.buscarPorId(1l);
+		JpaUtilTest.getInstancia().endSession();
+	}
+
+	@Test
+	@Ignore
+	public void excluirTurmaTest() {
+		TurmaDAO dao = new TurmaDAO(entityManager);
+		Cliente clienteProfessor = new Cliente();
+		Cliente clienteAluno = new Cliente();
+		Turma turmaSave = new Turma(2l, "NomeTurmaTeste", "Qalunos", "TurnoTeste", "SemetreTeste", new Date(),
+				new Date(), clienteProfessor, null, null);
+
+		JpaUtilTest.getInstancia().beginSession();
+		try {
+			dao.salvar(turmaSave);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		dao.excluir(2l);
 		JpaUtilTest.getInstancia().endSession();
 	}
 
