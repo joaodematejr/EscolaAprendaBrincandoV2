@@ -69,7 +69,8 @@ public class DocumentoDAOTest {
 		Assert.assertNull(entityManager);
 	}
 
-	@Test@Ignore
+	@Test
+	@Ignore
 	public void deletarDocumentoTest() {
 		AlbumDAO dao = new AlbumDAO(entityManager);
 		Documento documentoParaSalvar = new Documento(1l, null, null, null, null);
@@ -78,7 +79,6 @@ public class DocumentoDAOTest {
 		dao.excluir(documentoParaSalvar);
 		JpaUtilTest.getInstancia().endSession();
 	}
-	
 	
 
 }

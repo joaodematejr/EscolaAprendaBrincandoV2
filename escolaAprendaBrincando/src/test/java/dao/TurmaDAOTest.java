@@ -14,6 +14,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import commons.JpaUtilTest;
+import entity.Ambiente;
 import entity.Cliente;
 import entity.Turma;
 
@@ -81,21 +82,19 @@ public class TurmaDAOTest {
 
 	@Test
 	@Ignore
-	public void excluirTurmaTest() {
+	public void excluirUsuarioTest() throws SQLException {
 		TurmaDAO dao = new TurmaDAO(entityManager);
-		Cliente clienteProfessor = new Cliente();
-		Cliente clienteAluno = new Cliente();
-		Turma turmaSave = new Turma(2l, "NomeTurmaTeste", "Qalunos", "TurnoTeste", "SemetreTeste", new Date(),
-				new Date(), clienteProfessor, null, null);
-
+		Turma turmaSave = new Turma(5l, null, null, null, null, null, null, null, null, null);
 		JpaUtilTest.getInstancia().beginSession();
-		try {
-			dao.salvar(turmaSave);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		dao.excluir(2l);
-		JpaUtilTest.getInstancia().endSession();
+		dao.salvar(turmaSave);
+		dao.excluir(5l);
+
+	}
+
+	@Test
+	public void entityManagerTurmaNullTeste() {
+		entityManager = null;
+		Assert.assertNull(entityManager);
 	}
 
 }

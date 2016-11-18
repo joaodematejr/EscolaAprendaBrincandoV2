@@ -270,10 +270,21 @@ public class CalendarioMb {
 	}
 
 	public String salvar() throws Throwable {
-		eDao = new CalendarioDAO();
-		eDao.salvar(calendario);
-		atualizarAgenda();
-		calendario = new Calendario();
+		if (calendario.getAmbiente() == null) {
+			System.out.println("Ambiente Vazio");
+			if (calendario.getTurma() == null) {
+				System.out.println("Turma Vazio");
+				if (calendario.getProfessor() == null) {
+					System.out.println("Professor Vazio");
+				}
+			}
+		} else {
+			eDao = new CalendarioDAO();
+			eDao.salvar(calendario);
+			atualizarAgenda();
+			calendario = new Calendario();
+
+		}
 
 		return "";
 	}
@@ -311,7 +322,6 @@ public class CalendarioMb {
 	public void dataSelecionado(SelectEvent selectEvent) {
 
 		ScheduleEvent calendari = (ScheduleEvent) selectEvent.getObject();
-
 		for (Calendario ca : listaCalendarios) {
 			if (ca.getId() == (Long) calendari.getData()) {
 				calendario = ca;

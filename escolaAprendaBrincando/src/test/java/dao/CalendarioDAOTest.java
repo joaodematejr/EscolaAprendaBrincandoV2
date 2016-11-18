@@ -72,7 +72,6 @@ public class CalendarioDAOTest {
 	}
 
 	@Test
-	@Ignore
 	public void deletarCalendarioTest() {
 		CalendarioDAO dao = new CalendarioDAO(entityManager);
 		Calendario calendarioParaSalvar = new Calendario(1l, "teste", null, null, null, null, null, null);
@@ -93,5 +92,21 @@ public class CalendarioDAOTest {
 		Assert.assertNull(entityManager);
 
 	}
+	@Test
+	public void buscarPorDataTest() {
+		CalendarioDAO dao = new CalendarioDAO(entityManager);
+		Calendario calendarioParaSalvar = new Calendario(1l, "teste", null, null, null, null, null, null);
+		dao.buscarPorDatas(null, null);
+
+	}
+	@Test
+	public void buscarPorProfessorTest() {
+		CalendarioDAO dao = new CalendarioDAO(entityManager);
+		Calendario calendarioParaSalvar = new Calendario(1l, "teste", null, null, null, null, null, null);
+		dao.listarCalendarioPorProfessor(1l);
+
+	}
+	
+	
 
 }

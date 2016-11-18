@@ -42,6 +42,7 @@ public class CalendarioDAO extends DAO {
 		getEM().remove(calendario);
 
 	}
+	
 
 	@SuppressWarnings("unchecked")
 	public List<Calendario> buscarPorDatas(Date inicio, Date fim) {
