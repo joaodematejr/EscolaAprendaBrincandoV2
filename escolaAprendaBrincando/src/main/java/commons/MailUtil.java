@@ -57,7 +57,7 @@ public class MailUtil {
 					+ " ____________________________________________________________" + "<br/>" + "<br/>";
 		}
 		mimeMessage.setContent("<h4> Olá,  " + "\n" + assunto + " </h4>" + "<h4> Segue sua Agenda entre o periodo de "
-				+ fim + " at� " + inicio + " </h4>" + "<h4> Mensagem : " + mensagem + "</h4>" + "<h4>Sua Agenda,</h4>"
+				+ fim + " até " + inicio + " </h4>" + "<h4> Mensagem : " + mensagem + "</h4>" + "<h4>Sua Agenda,</h4>"
 				+ "<table style=\"border:1px solid black;\">" + "<tr><td><h4>" + listarPorDatasNome + "</h4></td></tr>"
 				+ "</table>" +
 				/* SimpleDateFormat */

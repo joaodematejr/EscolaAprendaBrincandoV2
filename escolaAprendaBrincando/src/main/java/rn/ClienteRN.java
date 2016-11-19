@@ -58,4 +58,8 @@ public class ClienteRN {
 		return dao.loginParaJson(email, senha);
 	}
 
+	public Cliente buscarPorCpf(String email) {
+		return dao.buscarPorCpf(email);
+	}
+
 }

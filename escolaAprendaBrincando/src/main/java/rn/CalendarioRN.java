@@ -52,9 +52,7 @@ public class CalendarioRN {
 			cj.setTitulo(c.getTitulo());
 			cj.setInicio(c.getInicio());
 			cj.setFim(c.getFim());
-			cj.setNomeTurma(c.getTurma());
-			cj.setProfessor(c.getProfessor());
-			cj.setAmbiente(c.getAmbiente());
+			cj.setProfessor(c.getProfessor().getNome());
 			calendarioJson.add(cj);
 
 		}

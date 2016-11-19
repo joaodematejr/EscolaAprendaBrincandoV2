@@ -119,7 +119,8 @@ public class ClienteMb {
 	}
 
 	public String salvar() throws Throwable {
-		try {
+		Cliente clienteLoad = clienteRN.buscarPorCpf(cliente.getCpf());
+		if (clienteLoad == null) {
 			MailUtil.sendConfirmacao(cliente.getNome(), cliente.getEmail(), cliente.getCpf(), cliente.getTelefone(),
 					cliente.getSenha());
 			String hash = Utils.senhaToSha256(cliente.getSenha());
@@ -128,14 +129,13 @@ public class ClienteMb {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso", "Salvo com sucesso."));
 			return "menuadministrativo";
-		} catch (IllegalArgumentException exception) {
-			exception.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", exception.getMessage()));
-		} catch (Exception e) {
-			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+			// } else if (cliente.getId() != 0 && (clienteLoad == null ||
+			// clienteLoad.getId() == cliente.getId())) {
+
+		} else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"O CPF " + cliente.getCpf() + " já está cadastrado no sistema!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 		return "menuadministrativo.xhtml";
 	}

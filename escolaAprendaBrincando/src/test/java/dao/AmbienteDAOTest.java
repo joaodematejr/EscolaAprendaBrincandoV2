@@ -66,6 +66,7 @@ public class AmbienteDAOTest {
 	}
 
 	@Test
+	@Ignore
 	public void deletarAmbienteTest() {
 		AmbienteDAO dao = new AmbienteDAO(entityManager);
 		Ambiente ambienteSalvar = new Ambiente(3l, null, null, null);
@@ -81,6 +82,5 @@ public class AmbienteDAOTest {
 		entityManager = null;
 		Assert.assertNull(entityManager);
 	}
-	
 
 }

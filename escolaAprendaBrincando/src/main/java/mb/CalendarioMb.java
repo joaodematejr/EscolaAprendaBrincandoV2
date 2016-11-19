@@ -15,6 +15,7 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -29,6 +30,7 @@ import commons.Utils;
 import dao.CalendarioDAO;
 import entity.Ambiente;
 import entity.Calendario;
+import entity.Cliente;
 import entity.Turma;
 import rn.CalendarioRN;
 import rn.TurmaRN;
@@ -270,12 +272,32 @@ public class CalendarioMb {
 	}
 
 	public String salvar() throws Throwable {
-		if (calendario.getAmbiente() == null) {
-			System.out.println("Ambiente Vazio");
-			if (calendario.getTurma() == null) {
-				System.out.println("Turma Vazio");
-				if (calendario.getProfessor() == null) {
-					System.out.println("Professor Vazio");
+		List<Calendario> calendarioLoad = calendarioRN.buscarPorDatas(getInicio(), getFim());
+		if (calendario.getTitulo() == null | calendario.getTitulo() == "") {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Titulo : Vazio", ""));
+			if (calendario.getAmbiente() == null) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Ambiente : Vazio", ""));
+				if (calendario.getTurma() == null) {
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_INFO, "Turma : Vazia", ""));
+					if (calendario.getProfessor() == null) {
+						FacesContext.getCurrentInstance().addMessage(null,
+								new FacesMessage(FacesMessage.SEVERITY_INFO, "Professor : Vazio", ""));
+						if (calendario.getDescricao() == null | calendario.getDescricao() == "") {
+							FacesContext.getCurrentInstance().addMessage(null,
+									new FacesMessage(FacesMessage.SEVERITY_INFO, "Descrição : Vazio", ""));
+							FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+									FacesMessage.SEVERITY_INFO, "Por favor Preencher os Campos acima !", ""));
+							if (calendario.getInicio().equals(inicio) == calendario.getFim().equals(fim)) {
+								FacesContext.getCurrentInstance().addMessage(null,
+										new FacesMessage(FacesMessage.SEVERITY_INFO,
+												"Horario iguais, Por favor Selecionar Horarios Diferentes", ""));
+
+							}
+						}
+					}
 				}
 			}
 		} else {
@@ -283,7 +305,8 @@ public class CalendarioMb {
 			eDao.salvar(calendario);
 			atualizarAgenda();
 			calendario = new Calendario();
-
+			RequestContext.getCurrentInstance().execute("PF('caixaCalendario').hide();");
+			RequestContext.getCurrentInstance().update("formCalendario:idCalendario");
 		}
 
 		return "";

@@ -12,9 +12,9 @@ public class CalendarioJson {
 	private String titulo;
 	private Date inicio;
 	private Date fim;
-	private Turma nomeTurma;
-	private Ambiente ambiente;
-	private Cliente professor;
+	private String nomeTurma;
+	private String ambiente;
+	private String professor;
 
 	public String getTitulo() {
 		return titulo;
@@ -40,27 +40,27 @@ public class CalendarioJson {
 		this.fim = fim;
 	}
 
-	public Turma getNomeTurma() {
+	public String getNomeTurma() {
 		return nomeTurma;
 	}
 
-	public void setNomeTurma(Turma nomeTurma) {
+	public void setNomeTurma(String nomeTurma) {
 		this.nomeTurma = nomeTurma;
 	}
 
-	public Ambiente getAmbiente() {
+	public String getAmbiente() {
 		return ambiente;
 	}
 
-	public void setAmbiente(Ambiente ambiente) {
+	public void setAmbiente(String ambiente) {
 		this.ambiente = ambiente;
 	}
 
-	public Cliente getProfessor() {
+	public String getProfessor() {
 		return professor;
 	}
 
-	public void setProfessor(Cliente professor) {
+	public void setProfessor(String professor) {
 		this.professor = professor;
 	}
 

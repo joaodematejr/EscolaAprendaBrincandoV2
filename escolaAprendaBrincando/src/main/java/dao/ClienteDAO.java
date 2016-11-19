@@ -51,6 +51,16 @@ public class ClienteDAO extends DAO {
 
 	}
 
+	public Cliente buscarPorCpf(String cpf) {
+		Query query = getEM().createQuery("SELECT c FROM Cliente c WHERE c.cpf = :cpf");
+		query.setParameter("cpf", cpf);
+		try {
+			return (Cliente) query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	public Cliente loginParaJson(String email, String senha) {
 		Query query = getEM().createQuery("SELECT u From Cliente u WHERE u.email  = :email AND u.senha = :senha");
 		query.setParameter("email", email);

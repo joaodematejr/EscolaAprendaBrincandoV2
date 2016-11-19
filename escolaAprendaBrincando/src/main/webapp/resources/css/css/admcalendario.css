@@ -112,7 +112,7 @@
 .ui-dialog .ui-dialog-content {
 	position: relative;
 	border: 0;
-	padding: 1.5em 4em;
+	padding: -0.5em 0em;
 	background: white;
 	overflow: auto;
 	zoom: 1;
