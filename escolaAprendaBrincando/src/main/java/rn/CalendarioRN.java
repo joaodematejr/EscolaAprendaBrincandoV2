@@ -6,6 +6,7 @@ import java.util.List;
 
 import dao.CalendarioDAO;
 import entity.Calendario;
+import entity.Cliente;
 import json.CalendarioJson;
 
 public class CalendarioRN {
@@ -44,6 +45,10 @@ public class CalendarioRN {
 		return dao.buscarPorDatas(inicio, fim);
 	}
 
+	public Calendario buscarPorData(Date inicio) {
+		return dao.buscarPorData(inicio);
+	}
+
 	public List<CalendarioJson> listaCalendariosParaJson() {
 		List<CalendarioJson> calendarioJson = new ArrayList<CalendarioJson>();
 		List<Calendario> calendarioCarregados = dao.listarCalendarios();
@@ -52,6 +57,8 @@ public class CalendarioRN {
 			cj.setTitulo(c.getTitulo());
 			cj.setInicio(c.getInicio());
 			cj.setFim(c.getFim());
+			cj.setNomeTurma(c.getTurma().getNomeTurma());
+			cj.setAmbiente(c.getAmbiente().getNome());
 			cj.setProfessor(c.getProfessor().getNome());
 			calendarioJson.add(cj);
 

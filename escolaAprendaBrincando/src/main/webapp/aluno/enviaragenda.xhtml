@@ -10,8 +10,6 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet"
-		href="../resources/font-awesome/css/font-awesome.min.css" />
 	<link rel="icon" href="../resources/imagens/icons.png"
 		type="image/x-icon" />
 	<title>Enviar Agenda</title>
@@ -139,22 +137,69 @@
 		<h:form>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Salvar Agenda PDF</h3>
+					<h3 class="panel-title">Envio de Agenda Por Email</h3>
 				</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-xs-3 col-sm-6 col-md-7 col-lg-6">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<legend>Nome</legend>
+								<h:inputText styleClass="form-control"
+									value="#{calendarioMb.nomeEmail}" id="InputNome" />
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<legend>Para</legend>
+								<h:inputText styleClass="form-control"
+									value="#{calendarioMb.para}" id="InputPara" />
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<legend>Copia</legend>
+								<h:inputText styleClass="form-control"
+									value="#{calendarioMb.copia}" id="InputCopia" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
 							<div class="form-group">
 								<div class="form-group">
 									<legend>Inicio</legend>
 									<div class='input-group date datetimepicker'>
-										<h:inputText styleClass="form-control">
+										<h:inputText styleClass="form-control"
+											value="#{calendarioMb.inicio}">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</h:inputText>
 										<span class="input-group-addon"><span
 											class="glyphicon glyphicon-calendar"></span></span>
 									</div>
-
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-8 col-lg-8">
+							<div class="form-group">
+								<legend>Assunto</legend>
+								<h:inputText styleClass="form-control"
+									value="#{calendarioMb.assunto}" id="InputAssunto" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+							<div class="form-group">
+								<div class="form-group">
+									<legend>Fim</legend>
+									<div class='input-group date datetimepicker'>
+										<h:inputText styleClass="form-control"
+											value="#{calendarioMb.fim}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:inputText>
+										<span class="input-group-addon"><span
+											class="glyphicon glyphicon-calendar"></span></span>
+									</div>
 								</div>
 							</div>
 							<h:commandLink styleClass="btn btn-primary btn-circle btn-lg"
@@ -162,35 +207,76 @@
 								<span class="glyphicon2 glyphicon-search"></span>
 							</h:commandLink>
 							<h:commandLink styleClass="btn btn-success btn-circle btn-lg"
-								immediate="true" action="#{gerarPDF.gerarPdf()}">
-								<span class="fa fa-file-pdf-o fa-1x" aria-hidden="true" />
+								action="#{calendarioMb.enviar()}">
+								<span class="glyphicon2 glyphicon-envelope"></span>
 							</h:commandLink>
 							<h:commandLink styleClass="btn btn-danger btn-circle btn-lg"
 								action="#{calendarioMb.atualizar}">
 								<span class="glyphicon2 glyphicon-refresh"></span>
 							</h:commandLink>
 						</div>
-						<div class="col-xs-3 col-sm-6 col-md-7 col-lg-6">
+						<div class="col-xs-3 col-sm-3 col-md-8 col-lg-8">
 							<div class="form-group">
-								<div class="form-group">
-									<legend>Fim</legend>
-									<div class='input-group date datetimepicker'>
-										<h:inputText styleClass="form-control">
-											<f:convertDateTime pattern="dd/MM/yyyy" />
-										</h:inputText>
-										<span class="input-group-addon"><span
-											class="glyphicon glyphicon-calendar"></span></span>
-									</div>
-								</div>
+								<legend>Mensagem</legend>
+								<h:inputTextarea rows="5" styleClass="form-control"
+									value="#{calendarioMb.mensagem}" id="InputMensagem" />
 							</div>
 						</div>
-						<div class="row"></div>
+					</div>
+					<div class="agenda">
+						<div class="table-responsive">
+							<h:dataTable id="filtro" value="#{calendarioMb.listarPorDatas}"
+								var="calendario"
+								styleClass="table table-condensed table-bordered table table-hover">
+								<h:column>
+									<div class="agenda-date active" rowspan="0">
+										<div class="dayofmonth">
+											<f:facet styleClass="texto1" name="header" class="texto1">Data</f:facet>
+											<h:outputText value="#{calendario.inicio}">
+												<f:convertDateTime pattern="dd" />
+											</h:outputText>
+										</div>
+										<div class="dayofweek">
+											<h:outputText value="#{calendario.inicio}">
+												<f:convertDateTime pattern="EEEEEEEE" />
+											</h:outputText>
+										</div>
+										<div class="shortdate text-muted">
+											<h:outputText value="#{calendario.inicio}">
+												<f:convertDateTime pattern="MMMMM,yyyy" />
+											</h:outputText>
+										</div>
+									</div>
+								</h:column>
+								<h:column>
+									<f:facet name="header">Horario</f:facet>
+									<h:outputText value="#{calendario.inicio}">
+										<f:convertDateTime pattern="h:mm a" />
+									</h:outputText>
+								- <h:outputText value="#{calendario.fim}">
+										<f:convertDateTime pattern="h:mm a" />
+									</h:outputText>
+								</h:column>
+								<h:column>
+									<f:facet name="header">Turma</f:facet>
+									<h:outputText value="#{calendario.turma.nomeTurma}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Ambiente</f:facet>
+									<h:outputText value="#{calendario.ambiente.nome}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Professor</f:facet>
+									<h:outputText value="#{calendario.professor.nome}" />
+								</h:column>
+							</h:dataTable>
+						</div>
 					</div>
 				</div>
 			</div>
 		</h:form>
 		<div class="texto1">
-			<h1>Salvar Agenda PDF</h1>
+			<h1>Enviar Agenda</h1>
 		</div>
 		<div class="btn-group btn-group-justified" role="group"
 			aria-label="...">

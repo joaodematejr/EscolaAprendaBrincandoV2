@@ -272,41 +272,23 @@ public class CalendarioMb {
 	}
 
 	public String salvar() throws Throwable {
-		List<Calendario> calendarioLoad = calendarioRN.buscarPorDatas(getInicio(), getFim());
-		if (calendario.getTitulo() == null | calendario.getTitulo() == "") {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Titulo : Vazio", ""));
-			if (calendario.getAmbiente() == null) {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_INFO, "Ambiente : Vazio", ""));
-				if (calendario.getTurma() == null) {
-					FacesContext.getCurrentInstance().addMessage(null,
-							new FacesMessage(FacesMessage.SEVERITY_INFO, "Turma : Vazia", ""));
-					if (calendario.getProfessor() == null) {
-						FacesContext.getCurrentInstance().addMessage(null,
-								new FacesMessage(FacesMessage.SEVERITY_INFO, "Professor : Vazio", ""));
-						if (calendario.getDescricao() == null | calendario.getDescricao() == "") {
-							FacesContext.getCurrentInstance().addMessage(null,
-									new FacesMessage(FacesMessage.SEVERITY_INFO, "Descrição : Vazio", ""));
-							FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-									FacesMessage.SEVERITY_INFO, "Por favor Preencher os Campos acima !", ""));
-							if (calendario.getInicio().equals(inicio) == calendario.getFim().equals(fim)) {
-								FacesContext.getCurrentInstance().addMessage(null,
-										new FacesMessage(FacesMessage.SEVERITY_INFO,
-												"Horario iguais, Por favor Selecionar Horarios Diferentes", ""));
-
-							}
-						}
-					}
-				}
-			}
-		} else {
+		Calendario carregarDataInicio = calendarioRN.buscarPorData(calendario.getInicio());
+		if (carregarDataInicio == null) {
 			eDao = new CalendarioDAO();
 			eDao.salvar(calendario);
 			atualizarAgenda();
 			calendario = new Calendario();
 			RequestContext.getCurrentInstance().execute("PF('caixaCalendario').hide();");
 			RequestContext.getCurrentInstance().update("formCalendario:idCalendario");
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso", "Salvo com sucesso."));
+
+		} else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Data " + calendario.getInicio().toGMTString()
+							+ "Já Cadastrada no sistema, Por favor escolher outro Horario !",
+					"");
+			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 
 		return "";

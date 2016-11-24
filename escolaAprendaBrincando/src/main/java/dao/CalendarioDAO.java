@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import com.mysql.jdbc.PreparedStatement;
 
 import entity.Calendario;
+import entity.Cliente;
 
 public class CalendarioDAO extends DAO {
 
@@ -50,6 +51,16 @@ public class CalendarioDAO extends DAO {
 		query.setParameter("inicio", inicio);
 		query.setParameter("fim", fim);
 		return query.getResultList();
+	}
+
+	public Calendario buscarPorData(Date inicio) {
+		Query query = getEM().createQuery("SELECT c FROM Calendario c WHERE c.inicio = :inicio",Calendario.class);
+		query.setParameter("inicio", inicio);
+		try {
+			return (Calendario) query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public CalendarioDAO() {

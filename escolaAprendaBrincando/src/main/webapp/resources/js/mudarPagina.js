@@ -66,3 +66,8 @@ function agendaPDF() {
 	setTimeout("document.location = 'gerarpdf.xhtml'", 1000);
 
 }
+
+function email() {
+	setTimeout("document.location = 'enviaragenda.xhtml'", 1000);
+
+}

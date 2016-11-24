@@ -83,28 +83,29 @@
 				<h:panelGrid columns="2">
 					<h:form>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Titulo :</label>
-							<p:inputText id="exampleInputEmail1" class="form-control"
-								value="#{calendarioMb.calendario.titulo}" />
+							<p:outputLabel for="titulo-id" value="Titulo" />
+							<p:inputText styleClass="form-control" id="titulo-id"
+								required="true" requiredMessage="O Titulo é obrigatório!"
+								value="#{calendarioMb.calendario.titulo}" maxlength="100"
+								placeholder="..." />
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail3">Ambiente :</label>
-							<div class="form-group">
-								<h:selectOneMenu id="exampleInputEmail3"
-									styleClass="form-control"
-									value="#{calendarioMb.calendario.ambiente}">
-									<f:selectItem itemLabel="-" />
-									<f:selectItems value="#{ambienteMb.listaAmbientes}"
-										var="ambiente" itemLabel="#{ambiente.nome}"
-										itemValue="#{ambiente}" />
-								</h:selectOneMenu>
-							</div>
+							<p:outputLabel for="ambiente-id" value="Ambiente" />
+							<h:selectOneMenu required="true"
+								requiredMessage="O Ambiente é obrigatório!" id="ambiente-id"
+								styleClass="form-control"
+								value="#{calendarioMb.calendario.ambiente}">
+								<f:selectItem itemLabel="-" />
+								<f:selectItems value="#{ambienteMb.listaAmbientes}"
+									var="ambiente" itemLabel="#{ambiente.nome}"
+									itemValue="#{ambiente}" />
+							</h:selectOneMenu>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail2">Turmas :</label>
 							<div class="form-group">
-								<h:selectOneMenu id="exampleInputEmail2"
-									styleClass="form-control"
+								<p:outputLabel for="turmas-id" value="Turmas" />
+								<h:selectOneMenu required="true" requiredMessage="A Turma é obrigatório!"
+									 id="turmas-id" styleClass="form-control"
 									value="#{calendarioMb.calendario.turma}">
 									<f:selectItem itemLabel="-" />
 									<f:selectItems value="#{turmaMb.listarTurmas}" var="turma"
@@ -113,9 +114,10 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputProf">Docente :</label>
 							<div class="form-group">
-								<h:selectOneMenu id="inputProf" styleClass="form-control"
+							<p:outputLabel for="prof-id" value="Docente" />
+								<h:selectOneMenu required="true" requiredMessage="O Docente é obrigatório!"
+									 id="prof-id" styleClass="form-control"
 									value="#{calendarioMb.calendario.professor}">
 									<f:selectItem itemLabel="-" />
 									<f:selectItems value="#{clienteMb.listaProfessores}"
@@ -125,8 +127,9 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail4">Descrição :</label>
-							<p:inputText id="exampleInputEmail4" class="form-control"
+							<p:outputLabel for="descricao-id" value="Descrição" />
+							<p:inputText required="true" requiredMessage="A Descrição é obrigatório!"
+									 id="descricao-id" class="form-control"
 								value="#{calendarioMb.calendario.descricao}" autoResize="true" />
 						</div>
 						<div class="form-group">
